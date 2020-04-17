@@ -3,6 +3,7 @@ from blogs.models import Blog
 from customers.models import Customer
 from tags.models import Tag
 from categories.models import Category
+from metas.models import Meta
 
 
 class Post(models.Model):
@@ -15,8 +16,9 @@ class Post(models.Model):
     # RelationShip
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, null=True)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True)
-    tags = models.ManyToManyField(Tag)
-    categories = models.ManyToManyField(Category)
+    tags = models.ManyToManyField(Tag, blank=True)
+    categories = models.ManyToManyField(Category, blank=True)
+    meta = models.OneToOneField(Meta, on_delete=models.CASCADE, null=True)
     # Generator
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)

@@ -6,5 +6,9 @@ from blogs.models import Blog
 
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    blog = models.OneToOneField(Blog, on_delete=models.CASCADE, null=True, blank=True)
+    blog = models.OneToOneField(
+        Blog, on_delete=models.CASCADE, null=True, blank=True)
     avatar = models.URLField(null=True, blank=True)
+
+    def __str__(self):
+        return str(self.id)

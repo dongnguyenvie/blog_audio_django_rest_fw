@@ -1,3 +1,9 @@
 from django.contrib import admin
+from metas.models import Meta
 
-# Register your models here.
+
+class MetaAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(Meta, MetaAdmin)
