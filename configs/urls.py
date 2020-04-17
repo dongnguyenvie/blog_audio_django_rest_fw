@@ -19,9 +19,11 @@ from django.urls import path, include
 URL_APPS = [
     path('post/', include(('apps.posts.api.urls', 'posts-api'), namespace="posts-api")),
     path('customer/', include(('apps.customers.api.urls', 'user-api'), namespace="user-api")),
+    path('blog/', include(('apps.blogs.api.urls', 'blog-api'), namespace="blog-api"))
 ]
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/', include(URL_APPS))
+    path('api/v1/', include(URL_APPS)),
+    path('dev/', include(('development.swagger.urls', 'swagger-api'), namespace="swagger-api"))
 ]

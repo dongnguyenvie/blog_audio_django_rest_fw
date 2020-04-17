@@ -1,7 +1,6 @@
 from django.db import models
-
-# Create your models here.
-
+# from rest_framework.renderers import JSONRenderer
+# import simplejson as json
 
 class Meta(models.Model):
     jsonLd = models.TextField()
@@ -13,4 +12,4 @@ class Meta(models.Model):
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
 
     def __str__(self):
-        return str(self.id)
+        return 'self'
