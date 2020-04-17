@@ -1,3 +1,9 @@
 from django.contrib import admin
+from advises.models import Advise
 
-# Register your models here.
+
+class AdvieAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(Advise, AdvieAdmin)

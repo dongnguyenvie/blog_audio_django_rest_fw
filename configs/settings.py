@@ -46,7 +46,10 @@ INSTALLED_APPS = [
     'customers',
     'categories',
     'tags',
-    'metas'
+    'metas',
+    'advises',
+    'menus',
+    'setting'
 ]
 
 MIDDLEWARE = [
