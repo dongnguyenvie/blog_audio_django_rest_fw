@@ -17,7 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 
 URL_APPS = [
-    path('post/', include(('apps.posts.api.urls', 'posts-api'), namespace="posts-api"))
+    path('post/', include(('apps.posts.api.urls', 'posts-api'), namespace="posts-api")),
+    path('customer/', include(('apps.customers.api.urls', 'user-api'), namespace="user-api")),
 ]
 
 urlpatterns = [
