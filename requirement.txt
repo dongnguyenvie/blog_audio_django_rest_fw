@@ -1,8 +1,0 @@
-# Dev
-drf-yasg
-
-  
-django
-djangorestframework
-gunicorn
-django-heroku
