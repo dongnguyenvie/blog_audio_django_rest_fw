@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'oauth2_provider',
     'rest_framework',
     'drf_yasg',
     'posts',
@@ -132,3 +133,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+
+# pylint: disable-all
+try:
+    import django_heroku
+    django_heroku.settings(locals())
+except ImportError:
+    pass
+
+# Config plugins extension
+from configs.plugins.rest_framework import *
+from configs.plugins.jwt import *
