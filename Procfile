@@ -1,1 +1,1 @@
-web: gunicorn settings.wsgi --log-file -
+web: gunicorn be_audiovyvy.wsgi --log-file -
