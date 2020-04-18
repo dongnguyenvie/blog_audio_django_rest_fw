@@ -1,11 +1,11 @@
 from rest_framework import serializers
-from blogs.models import Blog
 from metas.api.serializers import MetaSerializers
+from menus.models import Menu
 
 
-class BlogSerializer(serializers.ModelSerializer):
+class MenuSerializers(serializers.ModelSerializer):
     meta = MetaSerializers()
 
     class Meta:
-        model = Blog
+        model = Menu
         fields = '__all__'

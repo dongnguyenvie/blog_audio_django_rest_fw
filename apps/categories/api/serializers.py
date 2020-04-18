@@ -1,11 +1,11 @@
 from rest_framework import serializers
-from blogs.models import Blog
+from categories.models import Category
 from metas.api.serializers import MetaSerializers
 
 
-class BlogSerializer(serializers.ModelSerializer):
+class CategorySerializers(serializers.ModelSerializer):
     meta = MetaSerializers()
 
     class Meta:
-        model = Blog
+        model = Category
         fields = '__all__'

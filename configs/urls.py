@@ -19,7 +19,11 @@ from django.urls import path, include
 URL_APPS = [
     path('post/', include(('apps.posts.api.urls', 'posts-api'), namespace="posts-api")),
     path('customer/', include(('apps.customers.api.urls', 'user-api'), namespace="user-api")),
-    path('blog/', include(('apps.blogs.api.urls', 'blog-api'), namespace="blog-api"))
+    path('blog/', include(('apps.blogs.api.urls', 'blog-api'), namespace="blog-api")),
+    path('advise/', include(('apps.advises.api.urls', 'advise-api'), namespace="advise-api")),
+    path('category/', include(('apps.categories.api.urls', 'category-api'), namespace="category-api")),
+    path('menu/', include(('apps.menus.api.urls', 'menu-api'), namespace="menu-api")),
+    path('setting/', include(('apps.setting.api.urls', 'setting-api'), namespace="setting-api")),
 ]
 
 urlpatterns = [

@@ -1,11 +1,11 @@
 from rest_framework import serializers
-from blogs.models import Blog
+from advises.models import Advise
 from metas.api.serializers import MetaSerializers
 
 
-class BlogSerializer(serializers.ModelSerializer):
+class AdviseSerializer(serializers.ModelSerializer):
     meta = MetaSerializers()
 
     class Meta:
-        model = Blog
+        model = Advise
         fields = '__all__'
