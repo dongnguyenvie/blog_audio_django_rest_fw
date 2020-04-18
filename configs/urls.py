@@ -15,6 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+# from configs.plugins.jwt import urlpatterns as urlJWT
+# from rest_framework_simplejwt.views import (
+#     TokenObtainPairView,
+#     TokenRefreshView,
+# )
+
 
 URL_APPS = [
     path('post/', include(('apps.posts.api.urls', 'posts-api'), namespace="posts-api")),
@@ -24,6 +30,9 @@ URL_APPS = [
     path('category/', include(('apps.categories.api.urls', 'category-api'), namespace="category-api")),
     path('menu/', include(('apps.menus.api.urls', 'menu-api'), namespace="menu-api")),
     path('setting/', include(('apps.setting.api.urls', 'setting-api'), namespace="setting-api")),
+    # path('aaaa/', include((urlJWT, 'asetting-api'), namespace="asetting-api"))
+    # path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
 
 urlpatterns = [

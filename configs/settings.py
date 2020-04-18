@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import sys
-
+import dotenv
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -29,6 +29,11 @@ SECRET_KEY = 'h8d^o-&t(c0o8%3=ed*f(0lxepjmwt8*^a3)j225*9ox3x=nbf'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+
+# Load env
+dotenv_file = os.path.join(BASE_DIR, ".env")
+if os.path.isfile(dotenv_file):
+    dotenv.load_dotenv(dotenv_file)
 
 
 # Application definition
@@ -134,13 +139,18 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
-# pylint: disable-all
-try:
-    import django_heroku
-    django_heroku.settings(locals())
-except ImportError:
-    pass
+MODE_ENV = os.getenv("MODE_ENV") or False
 
 # Config plugins extension
 from configs.plugins.rest_framework import *
 from configs.plugins.jwt import *
+
+if MODE_ENV == "production":
+    from configs.plugins.production import *
+
+# # pylint: disable-all
+# try:
+#     import django_heroku
+#     django_heroku.settings(locals())
+# except ImportError:
+#     pass
