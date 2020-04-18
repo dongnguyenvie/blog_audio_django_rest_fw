@@ -148,9 +148,9 @@ from configs.plugins.jwt import *
 if MODE_ENV == "production":
     from configs.plugins.production import *
 
-# # pylint: disable-all
-# try:
-#     import django_heroku
-#     django_heroku.settings(locals())
-# except ImportError:
-#     pass
+# pylint: disable-all
+try:
+    import django_heroku
+    django_heroku.settings(locals())
+except ImportError:
+    pass
