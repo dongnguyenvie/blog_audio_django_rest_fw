@@ -1,13 +1,12 @@
 from rest_framework import serializers
 from blogs.models import Blog
 from metas.api.serializers import MetaSerializers
+from commons.crawler.spider import Spider
+# Spider.crawl_page(threading.currentThread().name, url)
 
 
 class BlogSerializer(serializers.ModelSerializer):
     meta = MetaSerializers()
-    # more_filed = serializers.SerializerMethodField()
-    # hahaha = serializers.CharField(
-    #     required=False, default='some_default_value')
 
     class Meta:
         model = Blog
@@ -18,8 +17,8 @@ class BlogSerializer(serializers.ModelSerializer):
         meta = MetaSerializers.create(
             MetaSerializers(), validated_data=meta_data)
         validated_data['meta'] = meta
-        blog, created = Blog.objects.update_or_create(**validated_data)
-        return blog
+        blogCreated = Blog.objects.create(**validated_data)
+        return blogCreated
 
     # def get_more_filed(self, obj):
     #     return "1aaaaa"

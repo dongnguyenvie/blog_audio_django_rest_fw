@@ -11,7 +11,9 @@ class Post(models.Model):
     slug = models.SlugField(unique=True)
     excerpt = models.TextField(default='')
     content = models.TextField(default='')
+    source = models.TextField(blank=True)
     ping = models.BooleanField(default=True)
+    type = models.CharField(max_length=30, default='post')
     status = models.CharField(max_length=30, default='publish')
     # RelationShip
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, null=True)

@@ -19,3 +19,6 @@ python-dotenv
 
 # Dev
 drf-yasg==1.17.1
+
+#crawl
+bs4
