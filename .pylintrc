@@ -6,4 +6,7 @@ disable=
     line-too-long
     bare-except
     wrong-import-order
+    invalid-name
+    C0103
 init-hook='import sys; sys.path.append("apps")'
+good-names=i,j,df,t,q
