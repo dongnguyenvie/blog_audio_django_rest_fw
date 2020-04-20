@@ -9,4 +9,4 @@ disable=
     invalid-name
     C0103
 init-hook='import sys; sys.path.append("apps")'
-good-names=i,j,df,t,q
+good-names=i,j,df,t,q,pk,pks

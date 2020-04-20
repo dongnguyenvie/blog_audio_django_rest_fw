@@ -141,12 +141,12 @@ STATIC_URL = '/static/'
 
 MODE_ENV = os.getenv("MODE_ENV") or False
 
-# Config plugins extension
-from configs.plugins.rest_framework import *
-from configs.plugins.jwt import *
+# Config core extension
+from configs.core.rest_framework import *
+from configs.core.jwt import *
 
 if MODE_ENV == "production":
-    from configs.plugins.production import *
+    from configs.core.production import *
 
 # pylint: disable-all
 try:
