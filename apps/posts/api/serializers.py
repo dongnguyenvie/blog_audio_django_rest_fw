@@ -1,5 +1,5 @@
 from queue import Queue
-from rest_framework import serializers
+from rest_framework import serializers, response, status
 from posts.models import Post
 # from tags.models import Tag
 from metas.api.serializers import MetaSerializers, MetaModel
@@ -16,12 +16,21 @@ class PostSerializer(serializers.ModelSerializer):
     # customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True)
     id_audio = serializers.CharField(
         required=False, default='')
+    owner = serializers.HiddenField(
+        default=serializers.CurrentUserDefault()
+    )
 
     class Meta:
         model = Post
         fields = '__all__'
 
     def create(self, validated_data):
+        owner = validated_data.pop('owner', None)
+        try:
+            if not owner.customer.blog:
+                raise serializers.ValidationError({"message": "blog not exists"})
+        except:
+            raise serializers.ValidationError({"message": "blog not exists"})
         if not validated_data['tags'] or 'tags' not in validated_data:
             validated_data.pop('tags')
         if not validated_data['categories'] or 'categories' not in validated_data:
