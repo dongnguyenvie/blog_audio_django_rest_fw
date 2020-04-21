@@ -5,8 +5,8 @@ from metas.models import Meta
 class Blog(models.Model):
     title = models.CharField(max_length=50, default='')
     slug = models.SlugField(unique=True)
-    excerpt = models.TextField()
-    content = models.TextField()
+    excerpt = models.TextField(blank=True)
+    content = models.TextField(blank=True)
     ping = models.BooleanField(default=True)
     status = models.CharField(max_length=30, default='publish')
     # RelationShip

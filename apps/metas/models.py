@@ -1,7 +1,7 @@
 from django.db import models
 
 class Meta(models.Model):
-    jsonLd = models.TextField()
+    jsonLd = models.TextField(blank=True)
     # type = models.CharField(max_length=10, db_index=True, null=True)
     view = models.BigIntegerField(default=0)
     like = models.BigIntegerField(default=0)
