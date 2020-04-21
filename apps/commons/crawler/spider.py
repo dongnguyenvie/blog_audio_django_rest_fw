@@ -10,24 +10,24 @@ from bs4 import BeautifulSoup
 class Spider:
 
     # Class variables (shared among all instances)
-    _q = None
-    _base_url = 'https://archive.org/download/'
+    q = None
+    base_url = 'https://archive.org/download/'
 
     def __init__(self, onJob):
-        Spider._q = onJob
-        self.create_spiders()
+        Spider.q = onJob
+        self._create_spiders()
 
-    def work(self):
+    def _work(self):
         while True:
-            [model, id_target] = self._q.get()
+            [model, id_target] = self.q.get()
             result = self.crawl_archive(
                 threading.currentThread().name, id_target)
             model.source = json.dumps(result)
             model.save()
-            self._q.task_done()
+            self.q.task_done()
 
-    def create_spiders(self):
-        t = threading.Thread(target=self.work)
+    def _create_spiders(self):
+        t = threading.Thread(target=self._work)
         t.daemon = True
         t.start()
 
@@ -35,7 +35,7 @@ class Spider:
     def crawl_archive(thread_name, id_target):
         print(thread_name + ' now crawling ' + id_target)
         results = []
-        url_target = urljoin(Spider._base_url, id_target)
+        url_target = urljoin(Spider.base_url, id_target)
         content = requests.get(url_target)
         soup = BeautifulSoup(content.text, 'html.parser')
         for elem in soup.select("table.directory-listing-table tbody td a", href=True):
@@ -48,8 +48,8 @@ class Spider:
 
     @staticmethod
     def create_archive_crawl_jobs(model, id_target):
-        Spider._q.put([model, id_target])
-        # Spider._q.join() # await for job end
+        Spider.q.put([model, id_target])
+        # Spider.q.join() # await for job end
 
 
 def sort_archive(obj):
