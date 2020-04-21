@@ -1,6 +1,4 @@
 from django.db import models
-# from rest_framework.renderers import JSONRenderer
-# import simplejson as json
 
 class Meta(models.Model):
     jsonLd = models.TextField()
@@ -14,3 +12,5 @@ class Meta(models.Model):
 
     def __str__(self):
         return str(self.id)
+    
+    # def delete()

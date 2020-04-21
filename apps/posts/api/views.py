@@ -25,6 +25,6 @@ class PostListAPIView(generics.ListCreateAPIView):
 class PostAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PostSerializer
     queryset = Post.objects.all()
-    permission_classes = []
+    # permission_classes = []
     # lookup_url_kwarg = 'id'
     # lookup_field = 'id'

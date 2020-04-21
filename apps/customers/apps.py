@@ -2,4 +2,6 @@ from django.apps import AppConfig
 
 
 class UsersConfig(AppConfig):
-    name = 'app.customer'
+    name = 'customers'
+    def ready(self):
+        import customers.signals  # pylint: disable=import-outside-toplevel,unused-import

@@ -38,5 +38,6 @@ URL_APPS = [
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include(URL_APPS)),
+    path('api-auth/', include('rest_framework.urls')),
     path('dev/', include(('development.swagger.urls', 'swagger-api'), namespace="swagger-api"))
 ]

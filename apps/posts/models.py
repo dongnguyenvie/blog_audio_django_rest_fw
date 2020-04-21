@@ -27,7 +27,10 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+    # instance.info.delete()
 
+
+# Post.delete()
 # class Post(models.Model):
 #     content = models.TextField()
 #     slug = models.SlugField(unique=True)

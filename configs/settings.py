@@ -56,7 +56,7 @@ INSTALLED_APPS = [
     'metas',
     'advises',
     'menus',
-    'setting'
+    'setting',
 ]
 
 MIDDLEWARE = [

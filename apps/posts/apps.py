@@ -2,4 +2,7 @@ from django.apps import AppConfig
 
 
 class PostsConfig(AppConfig):
-    name = 'apps.posts'
+    name = 'posts'
+
+    def ready(self):
+        import posts.signals  # pylint: disable=import-outside-toplevel,unused-import
