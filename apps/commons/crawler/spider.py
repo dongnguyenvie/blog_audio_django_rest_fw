@@ -32,8 +32,18 @@ class Spider:
         t.start()
 
     @staticmethod
-    def crawl_archive(thread_name, id_target):
-        print(thread_name + ' now crawling ' + id_target)
+    def crawl_archive(thread_name, id_targets):
+        print(thread_name + ' now crawling ' + id_targets)
+        results = []
+        if isinstance(id_targets, str):
+            list_id_target = id_targets.split(",")
+            for id_target in list_id_target:
+                results += Spider.crawling(id_target)
+            results.sort(key=sort_archive)
+        return results
+
+    @staticmethod
+    def crawling(id_target):
         results = []
         url_target = urljoin(Spider.base_url, id_target)
         content = requests.get(url_target)
@@ -43,7 +53,6 @@ class Spider:
             text = elem.getText()
             if link.endswith(".mp3"):
                 results.append({text: urljoin(url_target, link)})
-        results.sort(key=sort_archive)
         return results
 
     @staticmethod
