@@ -31,12 +31,11 @@ class PostSerializer(serializers.ModelSerializer):
         id_audio = validated_data.pop('id_audio', None)
         tags_data = validated_data.pop('tags', [])
         categories_data = validated_data.pop('categories', [])
-        meta_data = validated_data.pop('meta', None)
+        meta_data = validated_data.pop("meta", {})
         meta_serializer = self.fields['meta']
 
-        if meta_data:
-            meta = meta_serializer.create(validated_data=meta_data)
-            validated_data['meta'] = meta
+        meta = meta_serializer.create(validated_data=meta_data)
+        validated_data['meta'] = meta
 
         validated_data['blog'] = blog
         post_created = Post.objects.create(**validated_data)
