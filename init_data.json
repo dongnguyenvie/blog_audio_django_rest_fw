@@ -1,0 +1,18 @@
+[
+  {
+    "model": "setting.Setting",
+    "pk": 1,
+    "fields": {
+      "key": "menu_type_options",
+      "value": "[{\"key\":\"header\",\"value\":1},{\"key\":\"sidebar-default\",\"value\":2},{\"key\":\"footer\",\"value\":3},{\"key\":\"main-nav\",\"value\":4},{\"key\":\"detail\",\"value\":5}]"
+    }
+  },
+  {
+    "model": "setting.Setting",
+    "pk": 2,
+    "fields": {
+      "key": "post_type_options",
+      "value": "[{\"key\":\"post\",\"value\":1},{\"key\":\"video\",\"value\":2},{\"key\":\"audio\",\"value\":3},{\"key\":\"image\",\"value\":4},{\"key\":\"other\",\"value\":5}]"
+    }
+  }
+]

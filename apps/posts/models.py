@@ -4,23 +4,18 @@ from customers.models import Customer
 from tags.models import Tag
 from categories.models import Category
 from metas.models import Meta
+import commons.constans as constans
 
 
 class Post(models.Model):
-    TYPE_OPTIONS = [
-        (1, 'post'),
-        (2, 'video'),
-        (3, 'audio'),
-        (4, 'image'),
-        (5, 'other')
-    ]
     title = models.CharField(max_length=50, default='')
     slug = models.SlugField(unique=True)
     excerpt = models.TextField(default='', blank=True)
     content = models.TextField(default='', blank=True)
     source = models.TextField(blank=True)
     ping = models.BooleanField(default=True)
-    type = models.CharField(max_length=2, choices=TYPE_OPTIONS, default=1)
+    type = models.CharField(
+        max_length=2, choices=constans.post['TYPE_OPTIONS'], default=1)
     status = models.CharField(max_length=30, default='publish')
     # RelationShip
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, null=True)

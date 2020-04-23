@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from categories.models import Category
 from metas.api.serializers import MetaSerializers
-from commons.Validator.post_validator import get_blog_and_owner_validator
+from commons.serializers.helper import get_owner_and_blog
 
 
 class CategorySerializers(serializers.ModelSerializer):
@@ -15,7 +15,7 @@ class CategorySerializers(serializers.ModelSerializer):
         fields = '__all__'
 
     def create(self, validated_data):
-        [owner, blog] = get_blog_and_owner_validator(self, validated_data)
+        [owner, blog] = get_owner_and_blog(self, validated_data)
         meta_data = validated_data.pop("meta", {})
         meta_serializer = self.fields['meta']
 
@@ -27,7 +27,7 @@ class CategorySerializers(serializers.ModelSerializer):
         return category_created
 
     def update(self, instance, validated_data):
-        [owner, blog] = get_blog_and_owner_validator(self, validated_data)
+        [owner, blog] = get_owner_and_blog(self, validated_data)
 
         meta_data = validated_data.pop('meta', None)
         meta_instance = instance.meta

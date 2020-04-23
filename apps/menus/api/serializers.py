@@ -4,7 +4,7 @@ from menus.models import Menu
 
 
 class MenuSerializers(serializers.ModelSerializer):
-    meta = MetaSerializers()
+    # meta = MetaSerializers()
 
     class Meta:
         model = Menu

@@ -4,7 +4,7 @@ from posts.models import Post
 # from tags.models import Tag
 from metas.api.serializers import MetaSerializers, MetaModel
 from commons.crawler.spider import Spider
-from commons.Validator.post_validator import get_blog_and_owner_validator
+from commons.serializers.helper import get_owner_and_blog
 # from categories.api.serializers import CategorySerializers
 
 q = Queue()
@@ -26,7 +26,7 @@ class PostSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def create(self, validated_data):
-        [owner, blog] = get_blog_and_owner_validator(self, validated_data)
+        [owner, blog] = get_owner_and_blog(self, validated_data)
 
         id_audio = validated_data.pop('id_audio', None)
         tags_data = validated_data.pop('tags', [])
@@ -55,7 +55,7 @@ class PostSerializer(serializers.ModelSerializer):
         return post_created
 
     def update(self, instance, validated_data):
-        [owner, blog] = get_blog_and_owner_validator(self, validated_data)
+        [owner, blog] = get_owner_and_blog(self, validated_data)
 
         id_audio = validated_data.pop('id_audio', None)
         meta_data = validated_data.pop('meta', None)
