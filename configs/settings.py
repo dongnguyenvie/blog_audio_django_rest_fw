@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     'widgets',
     'menus',
     'setting',
-    'commons'
+    'apps.commons'
 ]
 
 MIDDLEWARE = [
