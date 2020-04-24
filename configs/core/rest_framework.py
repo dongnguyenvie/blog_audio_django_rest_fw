@@ -7,5 +7,5 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication'
     ),  #
-    'DEFAULT_PAGINATION_CLASS': 'apps.commons.pagination.Pagination.StandardResultsSetPagination'
+    'DEFAULT_PAGINATION_CLASS': 'apps.commons_app.pagination.Pagination.StandardResultsSetPagination'
 }
