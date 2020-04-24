@@ -30,6 +30,7 @@ URL_APPS = [
     path('category/', include(('apps.categories.api.urls', 'category-api'), namespace="category-api")),
     path('menu/', include(('apps.menus.api.urls', 'menu-api'), namespace="menu-api")),
     path('setting/', include(('apps.setting.api.urls', 'setting-api'), namespace="setting-api")),
+    path('tag/', include(('apps.tags.api.urls', 'tag-api'), namespace="tag-api")),
     # path('aaaa/', include((urlJWT, 'asetting-api'), namespace="asetting-api"))
     # path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     # path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
