@@ -117,3 +117,8 @@ LiveDemo: https://be-audiovyvy-django.herokuapp.com/
    ]
 }
 ```
+
+# Init data
+```
+python manage.py loaddata data/init_data.json
+```
