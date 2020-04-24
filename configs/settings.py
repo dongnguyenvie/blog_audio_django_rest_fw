@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     'categories',
     'tags',
     'metas',
-    'advises',
+    'widgets',
     'menus',
     'setting',
 ]

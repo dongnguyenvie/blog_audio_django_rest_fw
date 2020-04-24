@@ -1,11 +1,11 @@
 from rest_framework import serializers
-from advises.models import Advise
+from widgets.models import Widget
 from metas.api.serializers import MetaSerializers
 
 
-class AdviseSerializer(serializers.ModelSerializer):
+class WidgetSerializer(serializers.ModelSerializer):
     meta = MetaSerializers()
 
     class Meta:
-        model = Advise
+        model = Widget
         fields = '__all__'

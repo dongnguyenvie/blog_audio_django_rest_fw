@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
       "key": "menu_type_options",
-      "value": "[{\"key\":\"header\",\"value\":1},{\"key\":\"sidebar-default\",\"value\":2},{\"key\":\"footer\",\"value\":3},{\"key\":\"main-nav\",\"value\":4},{\"key\":\"detail\",\"value\":5}]"
+      "value": "[{\"key\":\"menu_1\",\"value\":1},{\"key\":\"menu_2\",\"value\":2},{\"key\":\"menu_3\",\"value\":3},{\"key\":\"menu_4\",\"value\":4},{\"key\":\"menu_5\",\"value\":5}]"
     }
   },
   {

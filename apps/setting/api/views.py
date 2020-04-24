@@ -13,4 +13,9 @@ class SettingTableResultsSetPagination(PageNumberPagination):
 class SettingListAPIView(generics.ListCreateAPIView):
     serializer_class = SettingSerializer
     queryset = Setting.objects.all()
-    pagination_class = SettingTableResultsSetPagination
+    pagination_class = None
+
+
+class SettingAPIView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = SettingSerializer
+    queryset = Setting.objects.all()

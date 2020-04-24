@@ -2,7 +2,7 @@ from django.db import models
 from metas.models import Meta
 
 
-class Advise(models.Model):
+class Widget(models.Model):
     type = models.CharField(max_length=30, default='none')
     title = models.CharField(max_length=30, default='')
     isDelete = models.BooleanField(default=False)

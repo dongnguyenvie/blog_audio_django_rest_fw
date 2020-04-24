@@ -26,7 +26,7 @@ URL_APPS = [
     path('post/', include(('apps.posts.api.urls', 'posts-api'), namespace="posts-api")),
     path('customer/', include(('apps.customers.api.urls', 'user-api'), namespace="user-api")),
     path('blog/', include(('apps.blogs.api.urls', 'blog-api'), namespace="blog-api")),
-    path('advise/', include(('apps.advises.api.urls', 'advise-api'), namespace="advise-api")),
+    path('widget/', include(('apps.widgets.api.urls', 'widgets-api'), namespace="widgets-api")),
     path('category/', include(('apps.categories.api.urls', 'category-api'), namespace="category-api")),
     path('menu/', include(('apps.menus.api.urls', 'menu-api'), namespace="menu-api")),
     path('setting/', include(('apps.setting.api.urls', 'setting-api'), namespace="setting-api")),
@@ -38,6 +38,6 @@ URL_APPS = [
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include(URL_APPS)),
-    path('api-auth/', include('rest_framework.urls')),
-    path('dev/', include(('development.swagger.urls', 'swagger-api'), namespace="swagger-api"))
+    # path('api-auth/', include('rest_framework.urls')),
+    path('docs/', include(('apps.commons.swagger.urls', 'swagger-api'), namespace="swagger-api"))
 ]
