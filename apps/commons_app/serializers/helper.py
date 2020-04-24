@@ -1,6 +1,6 @@
 from rest_framework.serializers import ValidationError
 from rest_framework import status, permissions
-from commons.validator.extension_validation import BlogValidationError
+from commons_app.validator.extension_validation import BlogValidationError
 
 
 def get_owner_and_blog(self, validated_data):

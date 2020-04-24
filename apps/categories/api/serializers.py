@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from categories.models import Category
 from metas.api.serializers import MetaSerializers
-from commons.serializers.helper import get_owner_and_blog
+from commons_app.serializers.helper import get_owner_and_blog
 
 
 class CategorySerializers(serializers.ModelSerializer):

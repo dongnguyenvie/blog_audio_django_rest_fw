@@ -4,7 +4,7 @@ from customers.models import Customer
 from tags.models import Tag
 from categories.models import Category
 from metas.models import Meta
-import commons.constans as constans
+import commons_app.constans as constans
 
 
 class Post(models.Model):

@@ -3,8 +3,8 @@ from rest_framework import serializers, response, status
 from posts.models import Post
 # from tags.models import Tag
 from metas.api.serializers import MetaSerializers, MetaModel
-from commons.crawler.spider import Spider
-from commons.serializers.helper import get_owner_and_blog
+from commons_app.crawler.spider import Spider
+from commons_app.serializers.helper import get_owner_and_blog
 # from categories.api.serializers import CategorySerializers
 
 q = Queue()

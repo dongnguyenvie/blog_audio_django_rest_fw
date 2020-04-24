@@ -1,7 +1,7 @@
 import json
 from django.db import models
 from metas.models import Meta
-import commons.constans as constans
+import commons_app.constans as constans
 
 
 class Menu(models.Model):
