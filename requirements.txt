@@ -2,9 +2,10 @@
 django-heroku
 gunicorn
 
-Django=3.0.5
+Django==3.0.5
 python-dotenv
 djangorestframework==3.11.0
+djangorestframework-simplejwt==4.4.0
 #swarm
 drf-yasg==1.17.1
 #beautify html
