@@ -34,7 +34,7 @@ ALLOWED_HOSTS = ['*']
 dotenv_file = os.path.join(BASE_DIR, ".env")
 if os.path.isfile(dotenv_file):
     dotenv.load_dotenv(dotenv_file)
-
+MODE_ENV = os.getenv("MODE_ENV") or False
 
 # Application definition
 
@@ -94,12 +94,12 @@ WSGI_APPLICATION = 'configs.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 
 # Password validation
@@ -140,14 +140,14 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
-MODE_ENV = os.getenv("MODE_ENV") or False
-
 # Config core extension
 from configs.core.rest_framework import *
 from configs.core.jwt import *
 
 if MODE_ENV == "production":
-    from configs.core.production import *
+    from configs.core.prod import *
+else:
+    from configs.core.dev import *
 
 # pylint: disable-all
 try:
