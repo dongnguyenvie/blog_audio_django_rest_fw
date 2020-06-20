@@ -5,7 +5,7 @@ DATABASES = {
         'NAME': 'audiovyvy_prod',
         'USER': 'root',
         'PASSWORD': 'Abc@123',
-        'HOST': 'pi-ubuntu1.local',
+        'HOST': 'pi-ubuntu1',
         'PORT': '5432',
     }
 }
