@@ -10,3 +10,5 @@ djangorestframework-simplejwt==4.4.0
 drf-yasg==1.17.1
 #beautify html
 bs4
+
+scrapy==2.2.0
