@@ -1,4 +1,4 @@
-# Scrapy settings for crawls project
+# Scrapy settings for scrapping project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,14 +7,28 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'crawls'
+# IMPORT DJANGO SETTINGS
+# import os
+# import sys
 
-SPIDER_MODULES = ['crawls.spiders']
-NEWSPIDER_MODULE = 'crawls.spiders'
+# PROJECT_DIR = os.path.dirname(
+#     os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+#     )
+# sys.path.append(os.path.join(PROJECT_DIR, 'audio_src'))
+
+# os.environ['DJANGO_SETTINGS_MODULE'] = 'audio_src.settings'
+
+# import django
+# django.setup()
+
+# BOT_NAME = 'scrapping'
+
+# SPIDER_MODULES = ['scrapping.spiders']
+# NEWSPIDER_MODULE = 'scrapping.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'crawls (+http://www.yourdomain.com)'
+#USER_AGENT = 'scrapping (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -45,13 +59,13 @@ ROBOTSTXT_OBEY = True
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'crawls.middlewares.CrawlsSpiderMiddleware': 543,
+#    'scrapping.middlewares.ScrappingSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'crawls.middlewares.CrawlsDownloaderMiddleware': 543,
+#    'scrapping.middlewares.ScrappingDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -62,9 +76,9 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'crawls.pipelines.CrawlsPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'scrapping.pipelines.ScrappingPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
@@ -86,3 +100,4 @@ ROBOTSTXT_OBEY = True
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+LOG_LEVEL= 'ERROR'

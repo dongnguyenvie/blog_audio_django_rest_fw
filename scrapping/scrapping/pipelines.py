@@ -6,8 +6,12 @@
 
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
+from audio_src.apps.categories.models import Category
 
-
-class CrawlsPipeline:
+class ScrappingPipeline:
     def process_item(self, item, spider):
+        print(item)
+        cate = Category(title="test-category", description="description", status="publish")
+        cate.save()
+        print(cate.id)
         return item
