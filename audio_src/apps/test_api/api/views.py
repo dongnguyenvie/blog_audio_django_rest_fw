@@ -28,7 +28,7 @@ class TestView(viewsets.ViewSet):
     authentication_classes = []
     def dong(self, request):
         subprocess.Popen(['ls'])
-        process = subprocess.Popen(['scrapy', 'crawl', 'TruyenaudioSpider', '-o', 'data-raw.json'], cwd='scrapping')
+        process = subprocess.Popen(['scrapy', 'crawl', 'TruyenaudioSpider', '-o', 'data-raw.csv'], cwd='scrapping')
         return JsonResponse({'method': 'get'}, safe=False)
 
     def create(self, request):

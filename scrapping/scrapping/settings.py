@@ -107,7 +107,7 @@ ITEM_PIPELINES = {
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 LOG_LEVEL= 'ERROR'
 
-SPLASH_URL = 'http://192.168.93.108:8050'
+SPLASH_URL = 'http://localhost:8050'
 DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
 HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
 COOKIES_ENABLED = True # Nếu cần dùng Cookie
