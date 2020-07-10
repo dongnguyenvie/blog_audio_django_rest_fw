@@ -1,8 +1,9 @@
 from django.db import models
 from audio_src.apps.metas.models import Meta
-
+import uuid
 
 class Category(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=50, default='')
     description = models.TextField(default='')
     status = models.CharField(max_length=30, default='publish')

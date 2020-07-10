@@ -1,8 +1,9 @@
 from django.db import models
 from audio_src.apps.metas.models import Meta
-
+import uuid
 
 class Widget(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     type = models.CharField(max_length=30, default='none')
     title = models.CharField(max_length=30, default='')
     isDelete = models.BooleanField(default=False)

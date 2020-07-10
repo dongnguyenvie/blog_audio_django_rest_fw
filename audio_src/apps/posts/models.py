@@ -5,9 +5,10 @@ from audio_src.apps.tags.models import Tag
 from audio_src.apps.categories.models import Category
 from audio_src.apps.metas.models import Meta
 import audio_src.apps.commons_app.constans as constans
-
+import uuid
 
 class Post(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=50, default='')
     slug = models.SlugField(unique=True)
     excerpt = models.TextField(default='', blank=True)

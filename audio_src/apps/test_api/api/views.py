@@ -24,25 +24,11 @@ def home(request):
     return JsonResponse(response, safe=False)
     
 class TestView(viewsets.ViewSet):
-    permission_classes = ()
+    permission_classes = []
+    authentication_classes = []
     def dong(self, request):
-        # def innerFnc():
-            # process = CrawlerProcess(settings={
-            #     'LOG_LEVEL': 'ERROR',
-            #     # 'ITEM_PIPELINES': {
-            #     #     'process_item': 300,
-            #     # }
-            # })
-            # process.crawl(StackSpider)
-            # process.start()
-
-        # t = threading.Thread(target=innerFnc)
-        # t.daemon = True
-        # t.start()
-        # subprocess.Popen(['cd', './scrapping'])
         subprocess.Popen(['ls'])
-        # subprocess.Popen(['cd scrapping'])
-        process = subprocess.Popen(['scrapy', 'crawl', 'stack'], cwd='scrapping')
+        process = subprocess.Popen(['scrapy', 'crawl', 'TruyenaudioSpider', '-o', 'data-raw.json'], cwd='scrapping')
         return JsonResponse({'method': 'get'}, safe=False)
 
     def create(self, request):

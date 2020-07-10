@@ -1,8 +1,9 @@
 import json
 from django.db import models
-
+import uuid
 
 class Meta(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     jsonLd = models.TextField(blank=True, default=json.dumps({}))
     # type = models.CharField(max_length=10, db_index=True, null=True)
     view = models.BigIntegerField(default=0)

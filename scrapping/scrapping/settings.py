@@ -8,23 +8,24 @@
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
 # IMPORT DJANGO SETTINGS
-# import os
-# import sys
+import os
+import sys
 
-# PROJECT_DIR = os.path.dirname(
-#     os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-#     )
-# sys.path.append(os.path.join(PROJECT_DIR, 'audio_src'))
+PROJECT_DIR = os.path.dirname(
+    os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+    )
+print(PROJECT_DIR)
+sys.path.append(os.path.join(PROJECT_DIR, ''))
 
-# os.environ['DJANGO_SETTINGS_MODULE'] = 'audio_src.settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'audio_src.settings'
 
-# import django
-# django.setup()
+import django
+django.setup()
 
-# BOT_NAME = 'scrapping'
+BOT_NAME = 'scrapping'
 
-# SPIDER_MODULES = ['scrapping.spiders']
-# NEWSPIDER_MODULE = 'scrapping.spiders'
+SPIDER_MODULES = ['scrapping.spiders']
+NEWSPIDER_MODULE = 'scrapping.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -58,15 +59,19 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-#SPIDER_MIDDLEWARES = {
+SPIDER_MIDDLEWARES = {
 #    'scrapping.middlewares.ScrappingSpiderMiddleware': 543,
-#}
+    'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
+}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
+DOWNLOADER_MIDDLEWARES = {
 #    'scrapping.middlewares.ScrappingDownloaderMiddleware': 543,
-#}
+    'scrapy_splash.SplashCookiesMiddleware': 723,
+    'scrapy_splash.SplashMiddleware': 725,
+    'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+}
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
@@ -101,3 +106,9 @@ ITEM_PIPELINES = {
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 LOG_LEVEL= 'ERROR'
+
+SPLASH_URL = 'http://192.168.93.108:8050'
+DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
+HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
+COOKIES_ENABLED = True # Nếu cần dùng Cookie
+SPLASH_COOKIES_DEBUG = False
