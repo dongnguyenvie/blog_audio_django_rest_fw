@@ -36,14 +36,15 @@ class TruyenaudioSpider(Spider):
     name = "TruyenaudioSpider"
     allowed_domains = ["truyenaudio.org"]
     start_urls = [
-        "https://truyenaudio.org/kiem-hiep/",
+        "https://truyenaudio.org/all/",
         # "https://truyenaudio.org/kiem-hiep/?page=3"
     ]
 
     def start_requests(self):
         print("start_requests")
         for url in self.start_urls:
-            yield SplashRequest(url, self.parse, endpoint='execute', args={'lua_source': load_page_script, 'wait': 3})
+            # yield SplashRequest(url, self.parse, endpoint='execute', args={'lua_source': load_page_script, 'wait': 3})
+            yield SplashRequest(url, self.parse, args={'wait': 0.5})
 
     def parse(self, response):
         print("def parse")
@@ -58,13 +59,13 @@ class TruyenaudioSpider(Spider):
             urlProduct = "/".join(arrSplitUrlProduct)
 
             item['title'] = product.css('div.p-name h4 a::text').get().strip()
-            item['img'] = product.css('a.product-image img::attr(src)').get()
             item['href'] = urlProduct
             # Crawl detail
-            yield SplashRequest(urlProduct, meta={'item': item}, callback=self.parse_detail,  endpoint='execute', args={'lua_source': load_page_script, 'wait': 3})
-
+            yield SplashRequest(urlProduct, meta={'item': item}, callback=self.parse_detail, args={'wait': 0.5})
+        # Check next page if exists
         next_page = response.css(
-            '.dataTables_paginate ul.pagination li:nth-child(6) a::attr(href)').get()
+            '.dataTables_paginate ul.pagination li')[-2]
+        next_page = next_page.css("a::attr(href)").get()
         if next_page is not None and next_page != 'javascript:void(0)':
             next_page = response.urljoin(next_page)
             print(next_page)
@@ -73,10 +74,17 @@ class TruyenaudioSpider(Spider):
     def parse_detail(self, response):
         item = response.request.meta['item']
         product = Selector(response).css('article.portfolio-article')
+        categoryName = Selector(response).css(
+            'div.v-page-heading ol.breadcrumb li:nth-child(3) a::text').get().strip()
+        print(categoryName)
         title = product.css('h1 a::text').get()
+        img = product.css('figure.media-wrap a img::attr(src)').get()
         script = product.css(
             '#new-player > div > script:nth-child(1)::text').get()
         listUrlMp3 = [x.group() for x in re.finditer(
             r'(https?|ftp|file):\/\/(www.)?(.*?)\.(mp3)', script)]
-        item["resource"] = list(map(lambda link: link, listUrlMp3))
+
+        item["audio_resource"] = list(map(lambda link: link, listUrlMp3))
+        item["img"] = img
+        item["categoryName"] = categoryName
         yield item
