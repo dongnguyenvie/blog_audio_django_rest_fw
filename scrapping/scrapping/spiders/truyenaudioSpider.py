@@ -31,25 +31,29 @@ function main(splash)
 end
 """
 
-
 class TruyenaudioSpider(Spider):
     name = "TruyenaudioSpider"
     allowed_domains = ["truyenaudio.org"]
     start_urls = [
         "https://truyenaudio.org/all/",
-        # "https://truyenaudio.org/kiem-hiep/?page=3"
+        # "https://truyenaudio.org/kiem-hiep/?page=3",
+        # "https://truyenaudio.org/kiem-hiep/?page=1"
     ]
+    dataCrawled = 0
+    totalCrawled = 0
 
     def start_requests(self):
         print("start_requests")
         for url in self.start_urls:
             # yield SplashRequest(url, self.parse, endpoint='execute', args={'lua_source': load_page_script, 'wait': 3})
-            yield SplashRequest(url, self.parse, args={'wait': 0.5})
+            yield SplashRequest(url, self.parse, args={'wait': 2})
 
     def parse(self, response):
         print("def parse")
         products = Selector(response).css(
             '.v-blog-wrap .v-blog-items-wrap .category-product .category-product-item')
+        self.totalCrawled = self.totalCrawled + len(products)
+
         pages = {}
         for index, product in enumerate(products):
             item = {}
@@ -61,7 +65,7 @@ class TruyenaudioSpider(Spider):
             item['title'] = product.css('div.p-name h4 a::text').get().strip()
             item['href'] = urlProduct
             # Crawl detail
-            yield SplashRequest(urlProduct, meta={'item': item}, callback=self.parse_detail, args={'wait': 0.5})
+            yield SplashRequest(urlProduct, meta={'item': item, 'index': index}, callback=self.parse_detail, args={'wait': 0.5})
         # Check next page if exists
         next_page = response.css(
             '.dataTables_paginate ul.pagination li')[-2]
@@ -69,14 +73,14 @@ class TruyenaudioSpider(Spider):
         if next_page is not None and next_page != 'javascript:void(0)':
             next_page = response.urljoin(next_page)
             print(next_page)
-            yield Request(next_page, callback=self.parse)
+            yield response.follow(next_page, callback=self.parse)
 
     def parse_detail(self, response):
         item = response.request.meta['item']
+        index = response.request.meta['index']
         product = Selector(response).css('article.portfolio-article')
-        categoryName = Selector(response).css(
-            'div.v-page-heading ol.breadcrumb li:nth-child(3) a::text').get().strip()
-        print(categoryName)
+        categoryName = (Selector(response).css(
+            'div.v-page-heading ol.breadcrumb li:nth-child(3) a::text').get() or "none-category").strip()
         title = product.css('h1 a::text').get()
         img = product.css('figure.media-wrap a img::attr(src)').get()
         script = product.css(
@@ -87,4 +91,9 @@ class TruyenaudioSpider(Spider):
         item["audio_resource"] = list(map(lambda link: link, listUrlMp3))
         item["img"] = img
         item["categoryName"] = categoryName
+        self.dataCrawled = self.dataCrawled + 1
+        print(">>>=======<<<<")
+        print("{title} {categoryName} - index {index}".format(categoryName=categoryName, index=index, title=item["title"]))
+        print("dataCrawled {dataCrawled} vs totalCrawled {totalCrawled}".format(dataCrawled=self.dataCrawled, totalCrawled=self.totalCrawled))
+        print(">>>=======<<<<")
         yield item
