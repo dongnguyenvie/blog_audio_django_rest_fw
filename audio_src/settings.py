@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 'oauth2_provider',
     'rest_framework',
+    'django_filters',
     'drf_yasg',
     'audio_src.apps.posts',
     'audio_src.apps.blogs',
