@@ -17,10 +17,9 @@ class Article(models.Model):
     content = models.TextField(default='', blank=True)
     source = models.TextField(blank=True)
     ping = models.BooleanField(default=True)
-    type = models.CharField(
-        max_length=2, choices=constans.post['TYPE_OPTIONS'], default=1)
+    type = models.IntegerField(choices=constans.post['TYPE_OPTIONS'], default=1)
     status = models.CharField(max_length=30, default='publish')
-    thumbnail = models.CharField(max_length=50, default='')
+    thumbnail = models.CharField(max_length=50, default='', blank=True)
     # RelationShip
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, null=True)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True)
