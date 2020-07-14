@@ -9,7 +9,7 @@ class Menu(models.Model):
     name = models.CharField(max_length=50, default='')
     html = models.TextField(default=json.dumps({}))
     status = models.CharField(max_length=30, default='publish')
-    isDelete = models.BooleanField(default=False)
+    isDeleted = models.BooleanField(default=False)
     type = models.IntegerField(choices=constans.menu['TYPE_OPTIONS'])
     # RelationShip
     # meta = models.OneToOneField(Meta, on_delete=models.CASCADE, null=True)

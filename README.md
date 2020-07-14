@@ -126,3 +126,5 @@ python manage.py loaddata data/init_data.json
 https://github.com/JuanBenitezDev/django-rest-framework-crud/blob/master/movies/views.py
 https://github.com/openwisp/django-rest-framework-gis/blob/master/tests/django_restframework_gis_tests/views.py
 https://engineering.vokal.io/Systems/drf.md.html
+https://docs.djangoproject.com/en/3.0/ref/models/querysets/
+https://django-filter.readthedocs.io/en/stable/guide/usage.html

@@ -6,7 +6,7 @@ class Tag(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.TextField(max_length=30, default='')
     content = models.TextField(default='')
-    isDelete = models.BooleanField(default=False)
+    isDeleted = models.BooleanField(default=False)
     # ReplationShip
     meta = models.OneToOneField(Meta, on_delete=models.CASCADE)
     # Generator

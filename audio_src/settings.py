@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'drf_yasg',
-    'audio_src.apps.posts',
+    'audio_src.apps.articles',
     'audio_src.apps.blogs',
     'audio_src.apps.customers',
     'audio_src.apps.categories',

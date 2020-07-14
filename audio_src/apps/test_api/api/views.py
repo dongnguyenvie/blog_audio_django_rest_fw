@@ -13,7 +13,7 @@ import threading
 import subprocess
 import csv
 from django.conf import settings  # correct way
-from audio_src.apps.posts.models import Post
+from audio_src.apps.articles.models import Article
 base_dir = settings.BASE_DIR
 
 contentSeed = """

@@ -23,7 +23,7 @@ from django.urls import path, include
 
 
 URL_APPS = [
-    path('post/', include(('audio_src.apps.posts.api.urls', 'posts-api'), namespace="posts-api")),
+    path('article/', include(('audio_src.apps.articles.api.urls', 'article-api'), namespace="article-api")),
     path('customer/', include(('audio_src.apps.customers.api.urls', 'user-api'), namespace="user-api")),
     path('blog/', include(('audio_src.apps.blogs.api.urls', 'blog-api'), namespace="blog-api")),
     path('widget/', include(('audio_src.apps.widgets.api.urls', 'widgets-api'), namespace="widgets-api")),

@@ -1,6 +1,6 @@
 from django.dispatch import receiver
 from django.db.models.signals import post_save, post_delete
-from audio_src.apps.posts.models import Post
+from audio_src.apps.articles.models import Article
 
 
 @receiver(post_delete, sender=Post)

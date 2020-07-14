@@ -6,8 +6,10 @@ from audio_src.apps.categories.models import Category
 from audio_src.apps.metas.models import Meta
 import audio_src.apps.commons_app.constans as constans
 import uuid
+from django.urls import reverse
 
-class Post(models.Model):
+
+class Article(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=50, default='')
     slug = models.SlugField(unique=True)
@@ -32,7 +34,10 @@ class Post(models.Model):
     def __str__(self):
         return self.title
     # instance.info.delete()
-
+    # def get_absolute_url(self):
+    #     print("====>self.slug")
+    #     print(self.slug)
+    #     return reverse('article_detail_slug', kwargs={'slug': self.slug})
 
 # Post.delete()
 # class Post(models.Model):

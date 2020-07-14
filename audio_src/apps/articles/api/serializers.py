@@ -1,6 +1,6 @@
 from queue import Queue
 from rest_framework import serializers, response, status
-from audio_src.apps.posts.models import Post
+from audio_src.apps.articles.models import Article
 # from audio_src.apps.tags.models import Tag
 from audio_src.apps.metas.api.serializers import MetaSerializers, MetaModel
 from audio_src.apps.commons_app.crawler.spider import Spider
@@ -22,7 +22,7 @@ class PostSerializer(serializers.ModelSerializer):
     blog = serializers.StringRelatedField(read_only=True)
 
     class Meta:
-        model = Post
+        model = Article
         fields = '__all__'
 
     def create(self, validated_data):
@@ -38,7 +38,7 @@ class PostSerializer(serializers.ModelSerializer):
         validated_data['meta'] = meta
 
         validated_data['blog'] = blog
-        post_created = Post.objects.create(**validated_data)
+        post_created = Article.objects.create(**validated_data)
 
         if categories_data or tags_data:
             for category_id in categories_data:

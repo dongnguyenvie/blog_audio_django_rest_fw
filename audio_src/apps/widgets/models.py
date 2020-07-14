@@ -6,7 +6,7 @@ class Widget(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     type = models.CharField(max_length=30, default='none')
     title = models.CharField(max_length=30, default='')
-    isDelete = models.BooleanField(default=False)
+    isDeleted = models.BooleanField(default=False)
     image = models.URLField(blank=True)
     url = models.URLField(blank=True)
     size = models.CharField(max_length=30)
