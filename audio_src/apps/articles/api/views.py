@@ -1,7 +1,7 @@
 from rest_framework import generics, pagination, response, views, filters, viewsets
 from audio_src.apps.articles.models import Article
 from audio_src.apps.metas.models import Meta
-from audio_src.apps.articles.api.serializers import PostSerializer
+from audio_src.apps.articles.api.serializers import ArticleSerializer
 from django.http import JsonResponse
 from django.db.models import Q
 from django_filters.rest_framework import DjangoFilterBackend, filterset
@@ -35,7 +35,7 @@ class ArticleFilter(django_filters.rest_framework.FilterSet):
 
 
 class ArticleListView(generics.ListCreateAPIView):
-    serializer_class = PostSerializer
+    serializer_class = ArticleSerializer
     queryset = Article.objects.all()
 
     filter_backends = [DjangoFilterBackend,
@@ -59,7 +59,7 @@ class ArticleListView(generics.ListCreateAPIView):
 
 
 class ArticleDetailsView(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = PostSerializer
+    serializer_class = ArticleSerializer
     queryset = Article.objects.all()
     # permission_classes = []
     # lookup_url_kwarg = 'id'
@@ -67,6 +67,6 @@ class ArticleDetailsView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class ArticleDetailBySlugView(generics.RetrieveAPIView):
-    serializer_class = PostSerializer
+    serializer_class = ArticleSerializer
     queryset = Article.objects.all()
     lookup_field = 'slug'

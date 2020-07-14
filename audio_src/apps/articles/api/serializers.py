@@ -12,7 +12,7 @@ q = Queue()
 Spider(q)
 
 
-class PostSerializer(serializers.ModelSerializer):
+class ArticleSerializer(serializers.ModelSerializer):
     meta = MetaSerializers(required=False)
     id_audio = serializers.CharField(
         required=False, default='')

@@ -1,9 +1,9 @@
 from django.contrib import admin
-from audio_src.apps.setting.models import Setting
+from audio_src.apps.setting.models import Settings
 
 
 class SettingAdmin(admin.ModelAdmin):
     pass
 
 
-admin.site.register(Setting, SettingAdmin)
+admin.site.register(Settings, SettingAdmin)
