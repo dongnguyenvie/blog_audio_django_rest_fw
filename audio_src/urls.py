@@ -29,7 +29,7 @@ URL_APPS = [
     path('widget/', include(('audio_src.apps.widgets.api.urls', 'widgets-api'), namespace="widgets-api")),
     path('category/', include(('audio_src.apps.categories.api.urls', 'category-api'), namespace="category-api")),
     path('menu/', include(('audio_src.apps.menus.api.urls', 'menu-api'), namespace="menu-api")),
-    path('setting/', include(('audio_src.apps.setting.api.urls', 'setting-api'), namespace="setting-api")),
+    path('setting/', include(('audio_src.apps.settings.api.urls', 'setting-api'), namespace="setting-api")),
     path('tag/', include(('audio_src.apps.tags.api.urls', 'tag-api'), namespace="tag-api")),
 
     # path('aaaa/', include((urlJWT, 'asetting-api'), namespace="asetting-api"))

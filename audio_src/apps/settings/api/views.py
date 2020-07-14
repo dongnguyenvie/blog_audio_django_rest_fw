@@ -1,6 +1,6 @@
 from rest_framework import generics
-from audio_src.apps.setting.api.serializers import SettingSerializer
-from audio_src.apps.setting.models import Settings
+from audio_src.apps.settings.api.serializers import SettingSerializer
+from audio_src.apps.settings.models import Settings
 from rest_framework.pagination import PageNumberPagination
 
 
