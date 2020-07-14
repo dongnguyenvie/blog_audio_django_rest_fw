@@ -1,6 +1,6 @@
 from rest_framework.serializers import ValidationError
 from rest_framework import status, permissions
-from audio_src.apps.commons_app.validator.extension_validation import BlogValidationError
+from audio_src.apps.utils.validator.extension_validation import BlogValidationError
 
 
 def get_owner_and_blog(self, validated_data):

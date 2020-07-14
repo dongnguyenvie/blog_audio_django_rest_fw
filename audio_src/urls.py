@@ -41,7 +41,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include(URL_APPS)),
     path('api-auth/', include('rest_framework.urls')),
-    path('docs/', include(('audio_src.apps.commons_app.swagger.urls', 'swagger-api'), namespace="swagger-api")),
+    path('docs/', include(('audio_src.apps.utils.swagger.urls', 'swagger-api'), namespace="swagger-api")),
     path('test/', include('audio_src.apps.test_api.api.urls'))
 
 ]

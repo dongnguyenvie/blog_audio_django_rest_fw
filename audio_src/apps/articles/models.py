@@ -4,7 +4,7 @@ from audio_src.apps.customers.models import Customer
 from audio_src.apps.tags.models import Tag
 from audio_src.apps.categories.models import Category
 from audio_src.apps.metas.models import Meta
-import audio_src.apps.commons_app.constans as constans
+import audio_src.apps.utils.constans as constans
 import uuid
 from django.urls import reverse
 

@@ -3,8 +3,8 @@ from rest_framework import serializers, response, status
 from audio_src.apps.articles.models import Article
 # from audio_src.apps.tags.models import Tag
 from audio_src.apps.metas.api.serializers import MetaSerializers, MetaModel
-from audio_src.apps.commons_app.crawler.spider import Spider
-from audio_src.apps.commons_app.serializers.helper import get_owner_and_blog
+from audio_src.apps.utils.crawler.spider import Spider
+from audio_src.apps.utils.serializers.helper import get_owner_and_blog
 # from audio_src.apps.categories.api.serializers import CategorySerializers
 
 q = Queue()

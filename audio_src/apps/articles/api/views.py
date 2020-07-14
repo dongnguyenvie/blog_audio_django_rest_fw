@@ -7,7 +7,7 @@ from django.db.models import Q
 from django_filters.rest_framework import DjangoFilterBackend, filterset
 import django_filters
 from django.db import models
-from audio_src.apps.commons_app.filters.extends import RelatedOrderingFilter
+from audio_src.apps.utils.filters.extends import RelatedOrderingFilter
 
 
 class ArticleFilter(django_filters.rest_framework.FilterSet):

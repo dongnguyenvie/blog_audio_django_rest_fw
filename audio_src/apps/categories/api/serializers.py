@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from audio_src.apps.categories.models import Category
 from audio_src.apps.metas.api.serializers import MetaSerializers
-from audio_src.apps.commons_app.serializers.helper import get_owner_and_blog
+from audio_src.apps.utils.serializers.helper import get_owner_and_blog
 
 
 class CategorySerializers(serializers.ModelSerializer):

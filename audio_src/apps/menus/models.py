@@ -1,7 +1,7 @@
 import json
 from django.db import models
 from audio_src.apps.metas.models import Meta
-import audio_src.apps.commons_app.constans as constans
+import audio_src.apps.utils.constans as constans
 import uuid
 
 class Menu(models.Model):
