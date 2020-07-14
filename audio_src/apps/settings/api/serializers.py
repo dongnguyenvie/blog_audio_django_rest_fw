@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from audio_src.apps.setting.models import Settings
+from audio_src.apps.settings.models import Settings
 
 
 class SettingSerializer(serializers.ModelSerializer):

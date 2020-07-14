@@ -1,5 +1,5 @@
 from django.contrib import admin
-from audio_src.apps.setting.models import Settings
+from audio_src.apps.settings.models import Settings
 
 
 class SettingAdmin(admin.ModelAdmin):
