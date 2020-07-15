@@ -2,6 +2,7 @@ from django_filters.rest_framework import filterset
 import django_filters
 from audio_src.apps.articles.models import Article
 
+
 class ArticleFilter(django_filters.rest_framework.FilterSet):
     view = django_filters.CharFilter(
         field_name='meta__view', lookup_expr='contains')
@@ -19,8 +20,9 @@ class ArticleFilter(django_filters.rest_framework.FilterSet):
     timestamp__gte = django_filters.CharFilter(lookup_expr='gte')
     timestamp__lt = django_filters.CharFilter(lookup_expr='lt')
     timestamp__lte = django_filters.CharFilter(lookup_expr='lte')
+    isDeleted = django_filters.BooleanFilter(lookup_expr='exact')
 
     class Meta:
         model = Article
         fields = ['view', 'view__gt', 'view__gte', 'view__lt', 'view__lte', 'title',
-                  'content', 'timestamp__gt', 'timestamp__gte', 'timestamp__lt', 'timestamp__lte']
+                  'content', 'timestamp__gt', 'timestamp__gte', 'timestamp__lt', 'timestamp__lte', 'isDeleted']

@@ -14,6 +14,10 @@ import subprocess
 import csv
 from django.conf import settings  # correct way
 from audio_src.apps.articles.models import Article
+import math
+import random
+import uuid
+
 base_dir = settings.BASE_DIR
 
 contentSeed = """
@@ -58,10 +62,31 @@ class TestView(viewsets.ViewSet):
             for row in csv_reader:
                 if line_count == 0:
                     print(f'Column names are {", ".join(row)}')
-                if line_count < 20:
-                    post = Post(title=row[0], slug=row[1], source=json.dumps(row[2].split(
-                        ",")), content=contentSeed, excerpt=excerptText, thumbnail=thumbnailSeed)
-                    post.save()
+                if line_count < 15:
+                    url = 'http://localhost:8000/api/v1/article/'
+                    headers = {
+                        'authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTk0ODM1NDI0LCJqdGkiOiI4MmZjMjIyMDZjYzE0M2YxOTZjNzhlNmFkZWU3NzE2YiIsInVzZXJfaWQiOjF9.9oJjfrVls98V6yFrLYjbK3QBLnO6l6YlqkWBvSL97z8',
+                        'Content-Type': 'application/json'
+                    }
+                    data = {
+                        'source': json.dumps(row[2].split(",")),
+                        'content': contentSeed,
+                        'excerpt': excerptText,
+                        'thumbnail': thumbnailSeed,
+                        "title": "title-{uuid}".format(uuid=uuid.uuid4()),
+                        "slug": "slug-of-{uuid}".format(uuid=uuid.uuid4()),
+                        "ping": False,
+                        "type": 1,
+                        'meta': {
+                                'jsonLd': "",
+                                'view': math.ceil(random.random() * 100),
+                                'like': math.ceil(random.random() * 100),
+                        },
+                    }
+                    requests.post(url, json=data, headers=headers)
+                    # post = Post(title=row[0], slug=row[1], source=json.dumps(row[2].split(
+                    #     ",")), content=contentSeed, excerpt=excerptText, thumbnail=thumbnailSeed)
+                    # post.save()
                 line_count += 1
 
         return JsonResponse({'message': 'succses'}, safe=False)
