@@ -13,6 +13,6 @@ class StandardResultsSetPagination(pagination.PageNumberPagination):
                 'previous': self.get_previous_link()
             },
             'count': self.page.paginator.count,
-            'page_size': self.page_size,
+            # 'page_size': self.page_size,
             'results': data
         })

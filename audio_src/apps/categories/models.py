@@ -7,6 +7,7 @@ class Category(models.Model):
     title = models.CharField(max_length=50, default='')
     description = models.TextField(default='')
     status = models.CharField(max_length=30, default='publish')
+    isDeleted = models.BooleanField(default=False)
     # ReplationShip
     meta = models.OneToOneField(Meta, on_delete=models.CASCADE)
     # Generator

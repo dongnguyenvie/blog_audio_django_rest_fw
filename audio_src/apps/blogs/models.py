@@ -10,6 +10,7 @@ class Blog(models.Model):
     content = models.TextField(blank=True)
     ping = models.BooleanField(default=True)
     status = models.CharField(max_length=30, default='publish')
+    isDeleted = models.BooleanField(default=False)
     # RelationShip
     meta = models.OneToOneField(Meta, on_delete=models.CASCADE, null=True)
     # Generator

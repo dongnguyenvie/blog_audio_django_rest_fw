@@ -1,18 +1,17 @@
 from queue import Queue
 from rest_framework import serializers, response, status
 from audio_src.apps.articles.models import Article
-# from audio_src.apps.tags.models import Tag
 from audio_src.apps.metas.api.serializers import MetaSerializers, MetaModel
 from audio_src.apps.utils.crawler.spider import Spider
 from audio_src.apps.utils.serializers.helper import get_owner_and_blog
-# from audio_src.apps.categories.api.serializers import CategorySerializers
+from drf_queryfields import QueryFieldsMixin
 
 q = Queue()
 # Init threading
 Spider(q)
 
 
-class ArticleSerializer(serializers.ModelSerializer):
+class ArticleSerializer(QueryFieldsMixin, serializers.ModelSerializer):
     meta = MetaSerializers(required=False)
     id_audio = serializers.CharField(
         required=False, default='')
