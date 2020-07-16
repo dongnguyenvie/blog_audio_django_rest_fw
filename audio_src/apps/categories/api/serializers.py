@@ -2,9 +2,10 @@ from rest_framework import serializers
 from audio_src.apps.categories.models import Category
 from audio_src.apps.metas.api.serializers import MetaSerializers
 from audio_src.apps.utils.serializers.helper import get_owner_and_blog
+from drf_queryfields import QueryFieldsMixin
 
 
-class CategorySerializers(serializers.ModelSerializer):
+class CategorySerializers(QueryFieldsMixin, serializers.ModelSerializer):
     meta = MetaSerializers(required=False)
     owner = serializers.HiddenField(
         default=serializers.CurrentUserDefault()

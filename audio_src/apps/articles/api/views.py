@@ -1,7 +1,7 @@
 from rest_framework import generics, views, filters
 from audio_src.apps.articles.models import Article
 from audio_src.apps.articles.api.serializers import ArticleSerializer
-from django_filters.rest_framework import DjangoFilterBackend, filterset
+from django_filters.rest_framework import DjangoFilterBackend
 from django.db import models
 from audio_src.apps.utils.filters.extends import RelatedOrderingFilter
 from audio_src.apps.articles.filters import ArticleFilter
@@ -10,11 +10,11 @@ from audio_src.apps.articles.filters import ArticleFilter
 class ArticleListView(generics.ListCreateAPIView):
     serializer_class = ArticleSerializer
     queryset = Article.objects.all()
-    ordering = ('-timestamp')
+    ordering = ('?')
 
     filter_backends = [DjangoFilterBackend,
                        filters.SearchFilter, RelatedOrderingFilter]
-    filter_class = ArticleFilter
+    # filter_class = ArticleFilter
     filterset_fields = '__all__'
     ordering_fields = ('__all_related__')
 

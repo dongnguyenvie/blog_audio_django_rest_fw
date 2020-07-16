@@ -65,7 +65,7 @@ class TestView(viewsets.ViewSet):
                 if line_count < 15:
                     url = 'http://localhost:8000/api/v1/article/'
                     headers = {
-                        'authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTk0ODM1NDI0LCJqdGkiOiI4MmZjMjIyMDZjYzE0M2YxOTZjNzhlNmFkZWU3NzE2YiIsInVzZXJfaWQiOjF9.9oJjfrVls98V6yFrLYjbK3QBLnO6l6YlqkWBvSL97z8',
+                        'authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTk0OTMyNzQwLCJqdGkiOiJjNDg0ZTI4Y2ZjNzk0YmE5OTcwY2RjYmQxOTJmMDAxYSIsInVzZXJfaWQiOjF9.2rsuXpwfS9DtZpNTp8U2MIX7uRiR4pLEQ--B_5NtQa0',
                         'Content-Type': 'application/json'
                     }
                     data = {
@@ -82,6 +82,7 @@ class TestView(viewsets.ViewSet):
                                 'view': math.ceil(random.random() * 100),
                                 'like': math.ceil(random.random() * 100),
                         },
+                        'categories': ['ff7b3f0d-b9af-4a02-92f2-ed000ce40e1f']
                     }
                     requests.post(url, json=data, headers=headers)
                     # post = Post(title=row[0], slug=row[1], source=json.dumps(row[2].split(

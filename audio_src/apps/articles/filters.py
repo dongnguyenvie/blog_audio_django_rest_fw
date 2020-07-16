@@ -21,8 +21,13 @@ class ArticleFilter(django_filters.rest_framework.FilterSet):
     timestamp__lt = django_filters.CharFilter(lookup_expr='lt')
     timestamp__lte = django_filters.CharFilter(lookup_expr='lte')
     isDeleted = django_filters.BooleanFilter(lookup_expr='exact')
+    uncategories = django_filters.BooleanFilter(
+        field_name='categories', lookup_expr='isnull')
+    has_category = django_filters.BooleanFilter(
+        field_name='category', lookup_expr='isnull', exclude=True)
 
     class Meta:
         model = Article
         fields = ['view', 'view__gt', 'view__gte', 'view__lt', 'view__lte', 'title',
-                  'content', 'timestamp__gt', 'timestamp__gte', 'timestamp__lt', 'timestamp__lte', 'isDeleted']
+                  'content', 'timestamp__gt', 'timestamp__gte', 'timestamp__lt', 'timestamp__lte',
+                  'isDeleted', 'uncategories', 'has_category']
