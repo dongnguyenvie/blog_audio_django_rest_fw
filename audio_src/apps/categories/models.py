@@ -5,6 +5,7 @@ import uuid
 class Category(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=50, default='')
+    slug = models.SlugField(unique=True)
     description = models.TextField(default='')
     status = models.CharField(max_length=30, default='publish')
     isDeleted = models.BooleanField(default=False)

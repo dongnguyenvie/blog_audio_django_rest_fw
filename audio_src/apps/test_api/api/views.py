@@ -56,7 +56,7 @@ class TestView(viewsets.ViewSet):
 
     def importSeedData(self, request):
         data = []
-        with open(base_dir + '/scrapping/data/data-raw.csv', 'r') as csv_file:
+        with open(base_dir + '/scrapping/data/data-raw.csv', 'r', encoding="utf8") as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             line_count = 0
             for row in csv_reader:
@@ -65,7 +65,7 @@ class TestView(viewsets.ViewSet):
                 if line_count < 15:
                     url = 'http://localhost:8000/api/v1/article/'
                     headers = {
-                        'authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTk0OTMyNzQwLCJqdGkiOiJjNDg0ZTI4Y2ZjNzk0YmE5OTcwY2RjYmQxOTJmMDAxYSIsInVzZXJfaWQiOjF9.2rsuXpwfS9DtZpNTp8U2MIX7uRiR4pLEQ--B_5NtQa0',
+                        'authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTk0OTcwNjk1LCJqdGkiOiJkNjhkMGNiZDhlMDU0MTJjODFlZmI3Y2QzYjEyZDcyYiIsInVzZXJfaWQiOjF9.WXxV-dmsBdtf6utogclicPV1qljNprwbhI-h4520970',
                         'Content-Type': 'application/json'
                     }
                     data = {
@@ -82,7 +82,7 @@ class TestView(viewsets.ViewSet):
                                 'view': math.ceil(random.random() * 100),
                                 'like': math.ceil(random.random() * 100),
                         },
-                        'categories': ['ff7b3f0d-b9af-4a02-92f2-ed000ce40e1f']
+                        'categories': ['772c7524-5199-4856-9b7e-7eadbad40068']
                     }
                     requests.post(url, json=data, headers=headers)
                     # post = Post(title=row[0], slug=row[1], source=json.dumps(row[2].split(
