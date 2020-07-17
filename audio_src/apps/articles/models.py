@@ -20,7 +20,7 @@ class Article(models.Model):
     type = models.IntegerField(choices=constans.post['TYPE_OPTIONS'], default=1)
     status = models.CharField(max_length=30, default='publish')
     isDeleted = models.BooleanField(default=False)
-    thumbnail = models.CharField(max_length=50, default='', blank=True)
+    thumbnail = models.URLField(default='', blank=True)
     # RelationShip
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, null=True)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True)
