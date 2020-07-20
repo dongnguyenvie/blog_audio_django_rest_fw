@@ -62,18 +62,18 @@ class TestView(viewsets.ViewSet):
             for row in csv_reader:
                 if line_count == 0:
                     print(f'Column names are {", ".join(row)}')
-                if line_count < 15:
+                elif line_count > 15 and line_count < 25:
                     url = 'http://localhost:8000/api/v1/article/'
                     headers = {
-                        'authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTk0OTcwNjk1LCJqdGkiOiJkNjhkMGNiZDhlMDU0MTJjODFlZmI3Y2QzYjEyZDcyYiIsInVzZXJfaWQiOjF9.WXxV-dmsBdtf6utogclicPV1qljNprwbhI-h4520970',
+                        'authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTk1MDA3MTczLCJqdGkiOiI0M2NhYWE3NzJiYzM0OWRmODdjNGMwNzdkMjY4MGI3MSIsInVzZXJfaWQiOjF9.ipos1oAl_oh7bOcdVlCtZhPJG_NQhe8VqVpIaMltE0k',
                         'Content-Type': 'application/json'
                     }
                     data = {
                         'source': json.dumps(row[2].split(",")),
                         'content': contentSeed,
                         'excerpt': excerptText,
-                        'thumbnail': thumbnailSeed,
-                        "title": "title-{uuid}".format(uuid=uuid.uuid4()),
+                        'thumbnail': row[3],
+                        "title": row[0],
                         "slug": "slug-of-{uuid}".format(uuid=uuid.uuid4()),
                         "ping": False,
                         "type": 1,
@@ -82,9 +82,15 @@ class TestView(viewsets.ViewSet):
                                 'view': math.ceil(random.random() * 100),
                                 'like': math.ceil(random.random() * 100),
                         },
-                        'categories': ['772c7524-5199-4856-9b7e-7eadbad40068']
+                        'categories': ['8fea005c-3463-4606-a9d7-f38d03f69783']
                     }
-                    requests.post(url, json=data, headers=headers)
+                    try:
+                        response = requests.post(url, json=data, headers=headers)
+                        response.raise_for_status()
+                    except requests.exceptions.HTTPError as e:
+                        print(1111)
+                        print(e.response.text)
+
                     # post = Post(title=row[0], slug=row[1], source=json.dumps(row[2].split(
                     #     ",")), content=contentSeed, excerpt=excerptText, thumbnail=thumbnailSeed)
                     # post.save()
