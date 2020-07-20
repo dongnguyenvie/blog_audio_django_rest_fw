@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     'drf_yasg',
     'audio_src.apps.articles',
     'audio_src.apps.blogs',
-    'audio_src.apps.customers',
     'audio_src.apps.categories',
     'audio_src.apps.tags',
     'audio_src.apps.metas',
@@ -60,6 +59,7 @@ INSTALLED_APPS = [
     'audio_src.apps.settings',
     # 'audio_src.apps.crawls',
     'audio_src.apps.test_api',
+    'audio_src.apps.users',
     # 'audio_src.apps.utils'
 ]
 
@@ -92,6 +92,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'audio_src.wsgi.application'
+
+# Custom user model
+AUTH_USER_MODEL = 'users.CustomUser' 
 
 
 # Database

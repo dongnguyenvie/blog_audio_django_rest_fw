@@ -1,6 +1,6 @@
 from django.db import models
 from audio_src.apps.blogs.models import Blog
-from audio_src.apps.customers.models import Customer
+from django.conf import settings
 from audio_src.apps.tags.models import Tag
 from audio_src.apps.categories.models import Category
 from audio_src.apps.metas.models import Meta
@@ -23,7 +23,7 @@ class Article(models.Model):
     thumbnail = models.URLField(default='', blank=True)
     # RelationShip
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, null=True)
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     tags = models.ManyToManyField(Tag, blank=True)
     categories = models.ManyToManyField(Category, blank=True)
     meta = models.OneToOneField(Meta, on_delete=models.CASCADE, null=True)
