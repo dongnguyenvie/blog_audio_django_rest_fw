@@ -5,18 +5,18 @@ from audio_src.apps.customers.models import Customer
 # Register your models here.
 
 
-class CustomerInline(admin.StackedInline):
-    model = Customer
-    can_delete = False
-    verbose_name_plural = 'customer'
+# class CustomerInline(admin.StackedInline):
+#     model = Customer
+#     can_delete = False
+#     verbose_name_plural = 'customer'
 
 # Define a new User admin
 
 
-class UserAdmin(BaseUserAdmin):
-    inlines = (CustomerInline,)
+# class UserAdmin(BaseUserAdmin):
+#     inlines = (CustomerInline,)
 
 
-# Re-register UserAdmin
-admin.site.unregister(User)
-admin.site.register(User, UserAdmin)
+# # Re-register UserAdmin
+# admin.site.unregister(User)
+# admin.site.register(User, UserAdmin)

@@ -5,7 +5,7 @@ from audio_src.apps.utils.validator.extension_validation import BlogValidationEr
 
 def get_owner_and_blog(self, validated_data):
     owner = validated_data.pop('owner', None)
-    blog = None if not owner else owner.customer.blog
+    blog = None if not owner else owner.user.blog
     if not blog:
         raise BlogValidationError()
     return [owner, blog]
