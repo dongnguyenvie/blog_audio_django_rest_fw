@@ -3,7 +3,7 @@ from rest_framework import serializers, response, status
 from audio_src.apps.articles.models import Article
 from audio_src.apps.metas.api.serializers import MetaSerializers, MetaModel
 from audio_src.apps.utils.crawler.spider import Spider
-from audio_src.apps.utils.serializers.helper import get_owner_and_blog
+from audio_src.apps.utils.serializers.helper import getOwnerAndBlog
 from drf_queryfields import QueryFieldsMixin
 
 q = Queue()
@@ -25,7 +25,7 @@ class ArticleSerializer(QueryFieldsMixin, serializers.ModelSerializer):
         fields = '__all__'
 
     def create(self, validated_data):
-        [owner, blog] = get_owner_and_blog(self, validated_data)
+        [owner, blog] = getOwnerAndBlog(self, validated_data)
 
         id_audio = validated_data.pop('id_audio', None)
         tags_data = validated_data.pop('tags', [])
@@ -54,7 +54,7 @@ class ArticleSerializer(QueryFieldsMixin, serializers.ModelSerializer):
         return post_created
 
     def update(self, instance, validated_data):
-        [owner, blog] = get_owner_and_blog(self, validated_data)
+        [owner, blog] = getOwnerAndBlog(self, validated_data)
 
         id_audio = validated_data.pop('id_audio', None)
         meta_data = validated_data.pop('meta', None)
