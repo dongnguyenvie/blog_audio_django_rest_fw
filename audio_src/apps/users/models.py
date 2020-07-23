@@ -13,4 +13,4 @@ class CustomUser(AbstractUser):
     #     Blog, on_delete=models.CASCADE, null=True, blank=True)
     avatar = models.URLField(null=True, blank=True)
     meta = models.OneToOneField(
-        Meta, on_delete=models.CASCADE, null=True, blank=True)
+        Meta, on_delete=models.SET_NULL, null=True, blank=True)

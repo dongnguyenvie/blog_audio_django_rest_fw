@@ -37,13 +37,14 @@ class ArticleSerializer(QueryFieldsMixin, serializers.ModelSerializer):
         validated_data['meta'] = meta
 
         validated_data['blog'] = blog
+        validated_data['user'] = owner
         post_created = Article.objects.create(**validated_data)
 
         if categories_data or tags_data:
             for category_id in categories_data:
                 post_created.categories.add(category_id)
             for tag_id in tags_data:
-                post_created.categories.add(tag_id)
+                post_created.tags.add(tag_id)
             post_created.save()
 
         if id_audio:

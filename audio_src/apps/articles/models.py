@@ -22,11 +22,11 @@ class Article(models.Model):
     isDeleted = models.BooleanField(default=False)
     thumbnail = models.URLField(default='', blank=True)
     # RelationShip
-    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, null=True)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+    blog = models.ForeignKey(Blog, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
     tags = models.ManyToManyField(Tag, blank=True)
     categories = models.ManyToManyField(Category, blank=True)
-    meta = models.OneToOneField(Meta, on_delete=models.CASCADE, null=True)
+    meta = models.OneToOneField(Meta, on_delete=models.SET_NULL, null=True)
     # Generator
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)

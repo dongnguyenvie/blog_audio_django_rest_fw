@@ -5,10 +5,10 @@ import uuid
 class Tag(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.TextField(max_length=30, default='')
-    content = models.TextField(default='')
+    content = models.TextField(default='', null=True, blank=True)
     isDeleted = models.BooleanField(default=False)
     # ReplationShip
-    meta = models.OneToOneField(Meta, on_delete=models.CASCADE)
+    meta = models.OneToOneField(Meta, on_delete=models.SET_NULL, null=True, blank=True)
     # Generator
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)

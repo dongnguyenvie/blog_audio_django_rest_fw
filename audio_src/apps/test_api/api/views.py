@@ -43,7 +43,7 @@ def home(request):
     response['lorem'] = loremText.text
     return JsonResponse(response, safe=False)
 
-
+token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTk1NDg5NDk1LCJqdGkiOiIyZWEzZTM5OGVjNjg0ZWUxOWRkNDU1YTM0NjExYjJmZiIsInVzZXJfaWQiOiI1ZWEzMjIxZS00ZTc4LTQyMmMtYmFhZS01NzAwODgzYjU1MTQifQ.E-W4j-IcUgqnFo2aE0CmQwFJDpwbCArouGLJTyo41Qw'
 class TestView(viewsets.ViewSet):
     permission_classes = []
     authentication_classes = []
@@ -65,7 +65,7 @@ class TestView(viewsets.ViewSet):
                 elif line_count > 15 and line_count < 25:
                     url = 'http://localhost:8000/api/v1/article/'
                     headers = {
-                        'authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTk1MDA3MTczLCJqdGkiOiI0M2NhYWE3NzJiYzM0OWRmODdjNGMwNzdkMjY4MGI3MSIsInVzZXJfaWQiOjF9.ipos1oAl_oh7bOcdVlCtZhPJG_NQhe8VqVpIaMltE0k',
+                        'authorization': 'Bearer {token}'.format(token=token),
                         'Content-Type': 'application/json'
                     }
                     data = {
@@ -82,7 +82,8 @@ class TestView(viewsets.ViewSet):
                                 'view': math.ceil(random.random() * 100),
                                 'like': math.ceil(random.random() * 100),
                         },
-                        'categories': ['8fea005c-3463-4606-a9d7-f38d03f69783']
+                        'categories': ['c6a7baae-0125-4a34-8059-799b7932eb18'],
+                        'tags': ['6a27de08-95ac-4b11-84d4-2dbd4e2514d7']
                     }
                     try:
                         response = requests.post(url, json=data, headers=headers)
