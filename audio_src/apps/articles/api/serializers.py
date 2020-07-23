@@ -22,7 +22,9 @@ class ArticleSerializer(QueryFieldsMixin, serializers.ModelSerializer):
 
     class Meta:
         model = Article
-        fields = '__all__'
+        # fields = '__all__'
+        exclude = ['isDeleted']
+
 
     def create(self, validated_data):
         [owner, blog] = getOwnerAndBlog(self, validated_data)

@@ -1,8 +1,9 @@
 from rest_framework import generics, views, filters
+from django.db import models
+from django_filters.rest_framework import DjangoFilterBackend
+
 from audio_src.apps.articles.models import Article
 from audio_src.apps.articles.api.serializers import ArticleSerializer
-from django_filters.rest_framework import DjangoFilterBackend
-from django.db import models
 from audio_src.apps.utils.filters.extends import RelatedOrderingFilter
 from audio_src.apps.articles.filters import ArticleFilter
 
