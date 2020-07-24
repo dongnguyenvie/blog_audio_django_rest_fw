@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'drf_yasg',
+    'channels',
     'audio_src.apps.articles',
     'audio_src.apps.blogs',
     'audio_src.apps.categories',
@@ -149,6 +150,8 @@ STATIC_URL = '/static/'
 # Config core extension
 from audio_src.core.rest_framework import *
 from audio_src.core.jwt import *
+from audio_src.core.channel import *
+from audio_src.core.cache import *
 
 if MODE_ENV == "production":
     from audio_src.core.prod import *

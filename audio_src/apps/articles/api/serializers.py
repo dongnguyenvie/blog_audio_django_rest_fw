@@ -1,10 +1,11 @@
 from queue import Queue
 from rest_framework import serializers, response, status
+from drf_queryfields import QueryFieldsMixin
+
 from audio_src.apps.articles.models import Article
 from audio_src.apps.metas.api.serializers import MetaSerializers, MetaModel
 from audio_src.apps.utils.crawler.spider import Spider
 from audio_src.apps.utils.serializers.helper import getOwnerAndBlog
-from drf_queryfields import QueryFieldsMixin
 
 q = Queue()
 # Init threading
