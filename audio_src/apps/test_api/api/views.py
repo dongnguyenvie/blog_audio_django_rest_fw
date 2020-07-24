@@ -43,7 +43,7 @@ def home(request):
     response['lorem'] = loremText.text
     return JsonResponse(response, safe=False)
 
-token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTk1NDg5NDk1LCJqdGkiOiIyZWEzZTM5OGVjNjg0ZWUxOWRkNDU1YTM0NjExYjJmZiIsInVzZXJfaWQiOiI1ZWEzMjIxZS00ZTc4LTQyMmMtYmFhZS01NzAwODgzYjU1MTQifQ.E-W4j-IcUgqnFo2aE0CmQwFJDpwbCArouGLJTyo41Qw'
+token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTk1NTA4OTEwLCJqdGkiOiJiNDZkOWIyODYyMDI0ZGYwYjk0ZmYxMzhhYmMxMjE4OCIsInVzZXJfaWQiOiJkNWQ1NTc3My02NmRlLTQ4ZWItOWFiYS02NjIyM2ZhNzdmZGUifQ.k1MFTbyDSjoqeHTdj680zO13Of2fxiOUtJZftZq2SQQ'
 class TestView(viewsets.ViewSet):
     permission_classes = []
     authentication_classes = []
@@ -62,7 +62,7 @@ class TestView(viewsets.ViewSet):
             for row in csv_reader:
                 if line_count == 0:
                     print(f'Column names are {", ".join(row)}')
-                elif line_count > 15 and line_count < 25:
+                elif line_count > 35 and line_count < 50:
                     url = 'http://localhost:8000/api/v1/article/'
                     headers = {
                         'authorization': 'Bearer {token}'.format(token=token),
@@ -82,8 +82,8 @@ class TestView(viewsets.ViewSet):
                                 'view': math.ceil(random.random() * 100),
                                 'like': math.ceil(random.random() * 100),
                         },
-                        'categories': ['c6a7baae-0125-4a34-8059-799b7932eb18'],
-                        'tags': ['6a27de08-95ac-4b11-84d4-2dbd4e2514d7']
+                        'categories': ['07f6b576-5a29-43e2-a16f-51221d4d47e2'],
+                        'tags': ['76998085-7fe7-49ab-a0d1-8d450b84d09e']
                     }
                     try:
                         response = requests.post(url, json=data, headers=headers)

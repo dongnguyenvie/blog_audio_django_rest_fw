@@ -1,3 +1,5 @@
+import os
+
 post = {
     'TYPE_OPTIONS': [
         (1, 'post'),
@@ -17,3 +19,5 @@ menu = {
         (5, 'detail')
     ]
 }
+
+CACHE_TIME = os.getenv("CACHE_TIME") or 60

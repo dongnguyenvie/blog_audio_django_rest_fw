@@ -1,10 +1,14 @@
 from rest_framework import generics, permissions, filters
 from django_filters.rest_framework import DjangoFilterBackend
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 from audio_src.apps.blogs.models import Blog
 from audio_src.apps.blogs.api.serializers import BlogSerializer
+from audio_src.apps.utils import constants
 
-class BlogListAPIView(generics.ListCreateAPIView):
+
+class BlogListListView(generics.ListCreateAPIView):
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = BlogSerializer
     queryset = Blog.objects.all()
@@ -14,7 +18,12 @@ class BlogListAPIView(generics.ListCreateAPIView):
     filterset_fields = '__all__'
     ordering_fields = ('__all__')
 
-class BlogAPIView(generics.RetrieveUpdateDestroyAPIView):
+    @method_decorator(cache_page(constants.CACHE_TIME), name="articles")
+    def list(self, *args, **kwargs):
+        return super(ArticleListView, self).list(self, *args, **kwargs)
+
+
+class BlogDetailsView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = BlogSerializer
     queryset = Blog.objects.all()
     # permission_classes = []

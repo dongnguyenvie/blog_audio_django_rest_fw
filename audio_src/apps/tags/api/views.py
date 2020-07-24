@@ -1,11 +1,14 @@
 from rest_framework import generics, filters
 from django_filters.rest_framework import DjangoFilterBackend
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
+from audio_src.apps.utils import constants
 from audio_src.apps.tags.api.serializers import TagSerializers
 from audio_src.apps.tags.models import Tag
 
 
-class TagListAPIView(generics.ListCreateAPIView):
+class TagListView(generics.ListCreateAPIView):
     serializer_class = TagSerializers
     queryset = Tag.objects.all()
     ordering = ('-timestamp')
@@ -15,6 +18,11 @@ class TagListAPIView(generics.ListCreateAPIView):
     filterset_fields = '__all__'
     ordering_fields = ('__all__')
 
-class TagAPIView(generics.RetrieveUpdateDestroyAPIView):
+    @method_decorator(cache_page(constants.CACHE_TIME), name="articles")
+    def list(self, *args, **kwargs):
+        return super(ArticleListView, self).list(self, *args, **kwargs)
+
+
+class TagDetailsView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = TagSerializers
     queryset = Tag.objects.all()

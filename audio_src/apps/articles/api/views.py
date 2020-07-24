@@ -3,9 +3,8 @@ from django.db import models
 from django_filters.rest_framework import DjangoFilterBackend
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
-from django.views.decorators.vary import vary_on_cookie
-from rest_framework.response import Response
 
+from audio_src.apps.utils import constants
 from audio_src.apps.articles.models import Article
 from audio_src.apps.articles.api.serializers import ArticleSerializer
 from audio_src.apps.utils.filters.extends import RelatedOrderingFilter
@@ -23,9 +22,10 @@ class ArticleListView(generics.ListCreateAPIView):
     filterset_fields = '__all__'
     ordering_fields = ('__all_related__')
 
-    @method_decorator(cache_page(5))
+    @method_decorator(cache_page(constants.CACHE_TIME), name="articles")
     def list(self, *args, **kwargs):
         return super(ArticleListView, self).list(self, *args, **kwargs)
+
 
 class ArticleDetailsView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ArticleSerializer

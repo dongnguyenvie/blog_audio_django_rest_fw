@@ -1,7 +1,7 @@
 import json
 from django.db import models
 from audio_src.apps.metas.models import Meta
-import audio_src.apps.utils.constans as constans
+import audio_src.apps.utils.constants as constants
 import uuid
 
 class Menu(models.Model):
@@ -10,7 +10,7 @@ class Menu(models.Model):
     html = models.TextField(default=json.dumps({}))
     status = models.CharField(max_length=30, default='publish')
     isDeleted = models.BooleanField(default=False)
-    type = models.IntegerField(choices=constans.menu['TYPE_OPTIONS'])
+    type = models.IntegerField(choices=constants.menu['TYPE_OPTIONS'])
     # RelationShip
     # meta = models.OneToOneField(Meta, on_delete=models.CASCADE, null=True)
     # Generator
