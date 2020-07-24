@@ -1,12 +1,13 @@
+import uuid
 from django.db import models
 from audio_src.apps.blogs.models import Blog
 from django.conf import settings
+from django.urls import reverse
+
 from audio_src.apps.tags.models import Tag
 from audio_src.apps.categories.models import Category
 from audio_src.apps.metas.models import Meta
-import audio_src.apps.utils.constants as constants
-import uuid
-from django.urls import reverse
+from audio_src.apps.utils import constants
 
 
 class Article(models.Model):
@@ -17,13 +18,15 @@ class Article(models.Model):
     content = models.TextField(default='', blank=True)
     source = models.TextField(blank=True)
     ping = models.BooleanField(default=True)
-    type = models.IntegerField(choices=constants.post['TYPE_OPTIONS'], default=1)
+    type = models.IntegerField(
+        choices=constants.post['TYPE_OPTIONS'], default=1)
     status = models.CharField(max_length=30, default='publish')
     isDeleted = models.BooleanField(default=False)
     thumbnail = models.URLField(default='', blank=True)
     # RelationShip
     blog = models.ForeignKey(Blog, on_delete=models.SET_NULL, null=True)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.SET_NULL, null=True)
     tags = models.ManyToManyField(Tag, blank=True)
     categories = models.ManyToManyField(Category, blank=True)
     meta = models.OneToOneField(Meta, on_delete=models.SET_NULL, null=True)

@@ -21,3 +21,5 @@ menu = {
 }
 
 CACHE_TIME = os.getenv("CACHE_TIME") or 60
+
+TOP_WATCHING_STORY_KEY = "TOP_WATCHING_STORY_KEY"

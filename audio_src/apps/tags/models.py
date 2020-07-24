@@ -1,6 +1,7 @@
 from django.db import models
-from audio_src.apps.metas.models import Meta
 import uuid
+
+from audio_src.apps.metas.models import Meta
 
 class Tag(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

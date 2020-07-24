@@ -1,8 +1,10 @@
+import uuid
 import json
 from django.db import models
+
 from audio_src.apps.metas.models import Meta
-import audio_src.apps.utils.constants as constants
-import uuid
+from audio_src.apps.utils import constants
+
 
 class Menu(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

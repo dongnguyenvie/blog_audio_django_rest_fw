@@ -1,4 +1,5 @@
 from django.conf.urls import url
+
 from audio_src.apps.widgets.api.views import WidgetListAPIView, WidgetAPIView
 
 urlpatterns = [
