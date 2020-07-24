@@ -5,24 +5,29 @@ from django.core.cache import cache
 
 from audio_src.apps.utils import constants
 
-dataMessages = []
+
+def getTopWachingStory():
+    return cache.get(constants.TOP_WATCHING_STORY_KEY)
+
+
+def setTopWatchingStory(data):
+    return cache.set(constants.TOP_WATCHING_STORY_KEY, data)
 
 
 class popularAudioConsumer(AsyncJsonWebsocketConsumer):
     async def connect(self):
-        print('connect')
-        await self.channel_layer.group_add("popular-audio", self.channel_name)
-        print(f"Add {self.channel_name} channel to users's group")
+        await self.channel_layer.group_add(constants.WS_POPULAR_AUDIO_GROUP, self.channel_name)
+        print(f"Connect::Add {self.channel_name} channel to users's group")
         await self.accept()
-        cache.set(constants.TOP_WATCHING_STORY_KEY, {
-                  'TOP_WATCHING_STORY_KEY': 'this is value of TOP_WATCHING_STORY_KEY'})
+        dataTopWachingStory = getTopWachingStory() or []
+
         await self.send(text_data=json.dumps({
             'type': 'init',
-            'messages': dataMessages
+            'data': dataTopWachingStory
         }))
 
     async def disconnect(self, close_code):
-        await self.channel_layer.group_discard("popular-audio", self.channel_name)
+        await self.channel_layer.group_discard(constants.WS_POPULAR_AUDIO_GROUP, self.channel_name)
         print(f"Remove {self.channel_name} channel from users's group")
 
     async def receive(self, text_data):
@@ -30,7 +35,10 @@ class popularAudioConsumer(AsyncJsonWebsocketConsumer):
         message = text_data_json['message']
         print(f"receive {message}")
 
-        await self.channel_layer.group_send("popular-audio", {'type': 'chat_messageA', 'message': message})
+        await self.channel_layer.group_send(constants.WS_POPULAR_AUDIO_GROUP, {'type': 'set_top_watching_story', 'message': message})
+
+    async def set_top_watching_story(self, event):
+        await self.send(text_data=json.dumps({'message': message}))
 
     async def chat_messageA(self, event):
         print(f"event {event}")

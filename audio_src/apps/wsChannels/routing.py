@@ -8,7 +8,7 @@ application = ProtocolTypeRouter({
     'websocket': AuthMiddlewareStack(
     	URLRouter(
     		[
-    			path("popular-audio/", popularAudioConsumer),
+    			path("popular-watching-audio/", popularAudioConsumer),
     		]
     	)
     )
