@@ -19,7 +19,7 @@ class SettingListView(generics.ListCreateAPIView):
     queryset = Settings.objects.all()
     pagination_class = None
 
-    @method_decorator(cache_page(constants.CACHE_TIME_TTL), name="articles")
+    @method_decorator(cache_page(constants.CACHE_TIME_TTL), name="settings")
     def list(self, *args, **kwargs):
         return super(SettingListView, self).list(self, *args, **kwargs)
 

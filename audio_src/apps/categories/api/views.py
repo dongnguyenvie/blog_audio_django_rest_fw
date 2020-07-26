@@ -18,7 +18,7 @@ class CategoryListView(generics.ListCreateAPIView):
     filterset_fields = '__all__'
     ordering_fields = ('__all__')
 
-    @method_decorator(cache_page(constants.CACHE_TIME_TTL), name="articles")
+    @method_decorator(cache_page(constants.CACHE_TIME_TTL), name="categories")
     def list(self, *args, **kwargs):
         return super(CategoryListView, self).list(self, *args, **kwargs)
 

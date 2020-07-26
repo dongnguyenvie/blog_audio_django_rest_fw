@@ -18,7 +18,7 @@ class BlogListListView(generics.ListCreateAPIView):
     filterset_fields = '__all__'
     ordering_fields = ('__all__')
 
-    @method_decorator(cache_page(constants.CACHE_TIME_TTL), name="articles")
+    @method_decorator(cache_page(constants.CACHE_TIME_TTL), name="blogs")
     def list(self, *args, **kwargs):
         return super(BlogListListView, self).list(self, *args, **kwargs)
 
