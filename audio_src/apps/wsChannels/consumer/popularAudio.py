@@ -16,7 +16,7 @@ def getTopWachingStoryList(data):
 
 
 def setTopWatchingStory(data={}):
-    return cache.set(constants.TOP_WATCHING_STORY_KEY, data, timeout=60)
+    return cache.set(constants.TOP_WATCHING_STORY_KEY, data, timeout=120)
 
 
 class popularAudioConsumer(AsyncJsonWebsocketConsumer):
@@ -60,7 +60,7 @@ class popularAudioConsumer(AsyncJsonWebsocketConsumer):
             }
 
         setTopWatchingStory(topWachingData)
-        await self.send(text_data=json.dumps({'clientType': WS_TYPES["POPULAR_AUDIO"], 'data': article}))
+        await self.send(text_data=json.dumps({'clientType': WS_TYPES["UPDATED_POPULAR_AUDIO"], 'data': article}))
 
     async def chat_messageA(self, event):
         print(f"event {event}")
