@@ -7,8 +7,10 @@ from functools import reduce
 from audio_src.apps.utils import constants
 from audio_src.apps.utils.constants import WS_TYPES
 
+
 def getWachingStoryData():
     return cache.get(constants.TOP_WATCHING_STORY_KEY) or {}
+
 
 def setTopWatchingStory(data={}):
     return cache.set(constants.TOP_WATCHING_STORY_KEY, data, timeout=None)
@@ -20,7 +22,7 @@ def getTopWachingStoryList(data):
         article = cur[1]
         try:
             index = list(map(lambda article: article['id'],
-                            acc)).index(article["id"])
+                             acc)).index(article["id"])
             _article = acc[index]
             acc[index] = {**_article, 'view': _article["view"] + 1}
         except ValueError:
@@ -29,7 +31,10 @@ def getTopWachingStoryList(data):
     articleLst = reduce(userWatchingReduce, data.items(), [])
     return [article for article in sorted(articleLst, key=lambda article: article["view"])][:10]
 
+
 WS_ACTIONS = WS_TYPES["ACTIONS"]
+
+
 class popularAudioConsumer(AsyncJsonWebsocketConsumer):
     async def connect(self):
         await self.channel_layer.group_add(constants.WS_POPULAR_AUDIO_GROUP, self.channel_name)
@@ -45,7 +50,6 @@ class popularAudioConsumer(AsyncJsonWebsocketConsumer):
             'clientType': WS_ACTIONS["QUERY_ALL_POPULAR_AUDIO"],
             'payload': topWachingStoryDataList
         }))
-
 
     async def disconnect(self, close_code):
         idWs = self.channel_name
@@ -67,22 +71,21 @@ class popularAudioConsumer(AsyncJsonWebsocketConsumer):
         articleWatching = userWatchingData.get(data['idWs'])
         if articleWatching:
             if clientType == WS_ACTIONS["TRACKING_WATCH_AUDIO"]:
-                articleWatching = userWatchingData[data['idWs']] = articleWatching
-            elif clientType == WS_ACTIONS["TRACKING_UNWATCH_AUDIO"]:
-                articleWatching = userWatchingData[data['idWs']] = articleWatching
+                articleWatching = userWatchingData[data['idWs']] = data
+            # elif clientType == WS_ACTIONS["TRACKING_UNWATCH_AUDIO"]:
+            #     articleWatching = userWatchingData[data['idWs']
+            #                                        ] = articleWatching
         else:
             articleWatching = userWatchingData[data['idWs']] = data
 
         setTopWatchingStory(userWatchingData)
-        await self.send(text_data=json.dumps({'clientType': WS_ACTIONS["TRACKING_WATCH_AUDIO"], 'payload': articleWatching}))
+        topWachingStoryDataList = getTopWachingStoryList(userWatchingData)
+        await self.send(text_data=json.dumps({'clientType': WS_ACTIONS["QUERY_ALL_POPULAR_AUDIO"], 'payload': topWachingStoryDataList}))
 
     async def action_update_unwatch_audio(self, event):
         userWatchingData = getWachingStoryData()
         idWs = event.get("data")
-        print(f"idWs {idWs}")
-        print(f"userWatchingData {userWatchingData}")
         articleUnwatching = userWatchingData.pop(idWs, None)
-        print(f"idWs {articleUnwatching}")
         setTopWatchingStory(userWatchingData)
 
         await self.send(text_data=json.dumps({'clientType': WS_ACTIONS["TRACKING_UNWATCH_AUDIO"], 'payload': articleUnwatching}))

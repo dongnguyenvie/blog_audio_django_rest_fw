@@ -21,3 +21,4 @@ djangorestframework-queryfields
 channels
 channels_redis
 django-redis
+django-cors-headers

@@ -29,7 +29,11 @@ SECRET_KEY = 'h8d^o-&t(c0o8%3=ed*f(0lxepjmwt8*^a3)j225*9ox3x=nbf'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
+CORS_ORIGIN_ALLOW_ALL=True
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',
+    'https://localhost:3000',
+)
 # Load env
 dotenv_file = os.path.join(BASE_DIR, ".env")
 if os.path.isfile(dotenv_file):
@@ -50,6 +54,7 @@ INSTALLED_APPS = [
     'django_filters',
     'drf_yasg',
     'channels',
+    'corsheaders',
     'audio_src.apps.articles',
     'audio_src.apps.blogs',
     'audio_src.apps.categories',
@@ -67,6 +72,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
