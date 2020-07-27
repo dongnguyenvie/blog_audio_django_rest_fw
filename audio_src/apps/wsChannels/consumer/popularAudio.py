@@ -38,23 +38,17 @@ WS_ACTIONS = WS_TYPES["ACTIONS"]
 class popularAudioConsumer(AsyncJsonWebsocketConsumer):
     async def connect(self):
         await self.channel_layer.group_add(constants.WS_POPULAR_AUDIO_GROUP, self.channel_name)
-        print(f"Connect::Add {self.channel_name} channel to users's group")
-        topWachingStoryData = getWachingStoryData()
-        topWachingStoryDataList = getTopWachingStoryList(topWachingStoryData)
+        # print(f"Connect::Add {self.channel_name} channel to users's group")
         await self.accept()
         await self.send(text_data=json.dumps({
             'clientType': WS_ACTIONS["QUERY_CONNECT_SETTINGS"],
             'payload': self.channel_name
         }))
-        await self.send(text_data=json.dumps({
-            'clientType': WS_ACTIONS["QUERY_ALL_POPULAR_AUDIO"],
-            'payload': topWachingStoryDataList
-        }))
 
     async def disconnect(self, close_code):
         idWs = self.channel_name
         await self.channel_layer.group_discard(constants.WS_POPULAR_AUDIO_GROUP, self.channel_name)
-        print(f"Remove {idWs} channel from users's group")
+        # print(f"Remove {idWs} channel from users's group")
         await self.channel_layer.group_send(constants.WS_POPULAR_AUDIO_GROUP, {'type': 'action_update_unwatch_audio', 'data': idWs})
 
     async def receive(self, text_data):
@@ -63,6 +57,8 @@ class popularAudioConsumer(AsyncJsonWebsocketConsumer):
         data = text_data_json.get("data")
         if clientType.startswith("WS_TYPES/WATCH/"):
             await self.channel_layer.group_send(constants.WS_POPULAR_AUDIO_GROUP, {'type': 'action_update_watch_audio', 'clientType': clientType, 'data': data})
+        if clientType == WS_ACTIONS["QUERY_ALL_POPULAR_AUDIO"]:
+            await self.channel_layer.group_send(constants.WS_POPULAR_AUDIO_GROUP, {'type': 'action_query_all_popular_audio'})
 
     async def action_update_watch_audio(self, event):
         userWatchingData = getWachingStoryData()
@@ -72,9 +68,6 @@ class popularAudioConsumer(AsyncJsonWebsocketConsumer):
         if articleWatching:
             if clientType == WS_ACTIONS["TRACKING_WATCH_AUDIO"]:
                 articleWatching = userWatchingData[data['idWs']] = data
-            # elif clientType == WS_ACTIONS["TRACKING_UNWATCH_AUDIO"]:
-            #     articleWatching = userWatchingData[data['idWs']
-            #                                        ] = articleWatching
         else:
             articleWatching = userWatchingData[data['idWs']] = data
 
@@ -89,3 +82,11 @@ class popularAudioConsumer(AsyncJsonWebsocketConsumer):
         setTopWatchingStory(userWatchingData)
 
         await self.send(text_data=json.dumps({'clientType': WS_ACTIONS["TRACKING_UNWATCH_AUDIO"], 'payload': articleUnwatching}))
+
+    async def action_query_all_popular_audio(self):
+        topWachingStoryData = getWachingStoryData()
+        topWachingStoryDataList = getTopWachingStoryList(topWachingStoryData)
+        await self.send(text_data=json.dumps({
+            'clientType': WS_ACTIONS["QUERY_ALL_POPULAR_AUDIO"],
+            'payload': topWachingStoryDataList
+        }))
