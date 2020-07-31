@@ -73,6 +73,6 @@ class ArticleSerializer(QueryFieldsMixin, serializers.ModelSerializer):
             post_updated.meta = meta
          # Crawl threading
         if id_audio:
-            post_updated.source = 'processing'
+            post_updated.resource = 'processing'
             Spider.create_archive_crawl_jobs(post_updated, id_audio)
         return post_updated
