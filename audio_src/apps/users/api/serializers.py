@@ -14,7 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
     last_login = serializers.DateTimeField(read_only=True)
     groups = serializers.StringRelatedField(many=True, read_only=True)
     user_permissions = serializers.StringRelatedField(many=True, read_only=True)
-    meta = MetaSerializers()
+    meta = MetaSerializers(read_only=True)
     blog = BlogSerializer(read_only=True)
     updated = serializers.DateTimeField(read_only=True)
     timestamp = serializers.DateTimeField(read_only=True)
@@ -25,31 +25,54 @@ class UserSerializer(serializers.ModelSerializer):
         #           'last_name', 'email', 'password', 'groups', 'user_permissions')
         fields = '__all__'
 
+    def create(self, validated_data):
+        password = validated_data.pop('password')
+        user = CustomUser(**validated_data)
+        user.set_password(password)
+        user.save()
+        return user
 
-# class CustomerSerializers(serializers.ModelSerializer):
-#     meta = MetaSerializers()
-#     user = UserSerializer()
-#     blog = BlogSerializer(read_only=True)
-#     updated = serializers.DateTimeField(read_only=True)
-#     timestamp = serializers.DateTimeField(read_only=True)
+    def create_user(self, email, password, **extra_fields):
+        """
+        Create and save a User with the given email and password.
+        """
+        if not email:
+            raise ValueError(_('The Email must be set'))
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save()
+        return user
 
-#     # permission_classes
+    def create_superuser(self, email, password, **extra_fields):
+        """
+        Create and save a SuperUser with the given email and password.
+        """
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('is_active', True)
 
-#     class Meta:
-#         model = Customer
-#         fields = '__all__'
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError(_('Superuser must have is_staff=True.'))
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError(_('Superuser must have is_superuser=True.'))
+        return self.create_user(email, password, **extra_fields)
 
-#     def create(self, validated_data):
-#         user_data = validated_data.pop('user')
-#         meta_data = validated_data.pop('meta')
-#         user_serializer = self.fields['user']
-#         meta_serializer = self.fields['meta']
+class UserLoginSerializer(serializers.Serializer):
+    email = serializers.CharField(max_length=300, required=True)
+    password = serializers.CharField(required=True, write_only=True)
 
-#         if user_data:
-#             user = user_serializer.create(validated_data=user_data)
-#             validated_data['user'] = user
-#         if meta_data:
-#             meta = meta_serializer.create(validated_data=meta_data)
-#             validated_data['meta'] = meta
-#         customer_created = Customer.objects.create(**validated_data)
-#         return customer_created
+class AuthUserSerializer(serializers.ModelSerializer):
+    auth_token = serializers.SerializerMethodField()
+
+    class Meta:
+         model = User
+         fields = ('id', 'email', 'first_name', 'last_name', 'is_active', 'is_staff')
+         read_only_fields = ('id', 'is_active', 'is_staff')
+    
+    def get_auth_token(self, obj):
+        token = Token.objects.create(user=obj)
+        return token.key
+
+class EmptySerializer(serializers.Serializer):
+    pass

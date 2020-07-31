@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from audio_src.apps.categories.models import Category
 from audio_src.apps.metas.api.serializers import MetaSerializers
-from audio_src.apps.utils.serializers.helper import get_owner_and_blog
+from audio_src.apps.utils.serializers.helper import getOwnerAndBlog
 from drf_queryfields import QueryFieldsMixin
 
 
@@ -16,7 +16,7 @@ class CategorySerializers(QueryFieldsMixin, serializers.ModelSerializer):
         fields = '__all__'
 
     def create(self, validated_data):
-        [owner, blog] = get_owner_and_blog(self, validated_data)
+        [owner, blog] = getOwnerAndBlog(self, validated_data)
         meta_data = validated_data.pop("meta", {})
         meta_serializer = self.fields['meta']
 
@@ -28,7 +28,7 @@ class CategorySerializers(QueryFieldsMixin, serializers.ModelSerializer):
         return category_created
 
     def update(self, instance, validated_data):
-        [owner, blog] = get_owner_and_blog(self, validated_data)
+        [owner, blog] = getOwnerAndBlog(self, validated_data)
 
         meta_data = validated_data.pop('meta', None)
         meta_instance = instance.meta

@@ -1,4 +1,5 @@
 from rest_framework import generics
+
 from audio_src.apps.widgets.models import Widget
 from audio_src.apps.widgets.api.serializers import WidgetSerializer
 

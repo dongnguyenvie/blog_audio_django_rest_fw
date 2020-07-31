@@ -1,8 +1,10 @@
+import uuid
 import json
 from django.db import models
+
 from audio_src.apps.metas.models import Meta
-import audio_src.apps.utils.constans as constans
-import uuid
+from audio_src.apps.utils import constants
+
 
 class Menu(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -10,7 +12,7 @@ class Menu(models.Model):
     html = models.TextField(default=json.dumps({}))
     status = models.CharField(max_length=30, default='publish')
     isDeleted = models.BooleanField(default=False)
-    type = models.IntegerField(choices=constans.menu['TYPE_OPTIONS'])
+    type = models.IntegerField(choices=constants.menu['TYPE_OPTIONS'])
     # RelationShip
     # meta = models.OneToOneField(Meta, on_delete=models.CASCADE, null=True)
     # Generator

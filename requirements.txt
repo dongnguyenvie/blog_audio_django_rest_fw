@@ -16,3 +16,9 @@ scrapy-splash==0.7.2
 subprocess
 django-filter
 djangorestframework-queryfields
+
+# channels
+channels
+channels_redis
+django-redis
+django-cors-headers

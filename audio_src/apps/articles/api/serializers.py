@@ -1,10 +1,11 @@
 from queue import Queue
 from rest_framework import serializers, response, status
+from drf_queryfields import QueryFieldsMixin
+
 from audio_src.apps.articles.models import Article
 from audio_src.apps.metas.api.serializers import MetaSerializers, MetaModel
 from audio_src.apps.utils.crawler.spider import Spider
-from audio_src.apps.utils.serializers.helper import get_owner_and_blog
-from drf_queryfields import QueryFieldsMixin
+from audio_src.apps.utils.serializers.helper import getOwnerAndBlog
 
 q = Queue()
 # Init threading
@@ -22,10 +23,12 @@ class ArticleSerializer(QueryFieldsMixin, serializers.ModelSerializer):
 
     class Meta:
         model = Article
-        fields = '__all__'
+        # fields = '__all__'
+        exclude = ['isDeleted']
+
 
     def create(self, validated_data):
-        [owner, blog] = get_owner_and_blog(self, validated_data)
+        [owner, blog] = getOwnerAndBlog(self, validated_data)
 
         id_audio = validated_data.pop('id_audio', None)
         tags_data = validated_data.pop('tags', [])
@@ -37,13 +40,14 @@ class ArticleSerializer(QueryFieldsMixin, serializers.ModelSerializer):
         validated_data['meta'] = meta
 
         validated_data['blog'] = blog
+        validated_data['user'] = owner
         post_created = Article.objects.create(**validated_data)
 
         if categories_data or tags_data:
             for category_id in categories_data:
                 post_created.categories.add(category_id)
             for tag_id in tags_data:
-                post_created.categories.add(tag_id)
+                post_created.tags.add(tag_id)
             post_created.save()
 
         if id_audio:
@@ -54,7 +58,7 @@ class ArticleSerializer(QueryFieldsMixin, serializers.ModelSerializer):
         return post_created
 
     def update(self, instance, validated_data):
-        [owner, blog] = get_owner_and_blog(self, validated_data)
+        [owner, blog] = getOwnerAndBlog(self, validated_data)
 
         id_audio = validated_data.pop('id_audio', None)
         meta_data = validated_data.pop('meta', None)

@@ -1,7 +1,11 @@
 from rest_framework import generics
+from rest_framework.pagination import PageNumberPagination
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+
+from audio_src.apps.utils import constants
 from audio_src.apps.settings.api.serializers import SettingSerializer
 from audio_src.apps.settings.models import Settings
-from rest_framework.pagination import PageNumberPagination
 
 
 class SettingTableResultsSetPagination(PageNumberPagination):
@@ -10,12 +14,16 @@ class SettingTableResultsSetPagination(PageNumberPagination):
     max_page_size = 1000
 
 
-class SettingListAPIView(generics.ListCreateAPIView):
+class SettingListView(generics.ListCreateAPIView):
     serializer_class = SettingSerializer
     queryset = Settings.objects.all()
     pagination_class = None
 
+    @method_decorator(cache_page(constants.CACHE_TIME_TTL), name="settings")
+    def list(self, *args, **kwargs):
+        return super(SettingListView, self).list(self, *args, **kwargs)
 
-class SettingAPIView(generics.RetrieveUpdateDestroyAPIView):
+
+class SettingDetailsView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = SettingSerializer
     queryset = Settings.objects.all()
