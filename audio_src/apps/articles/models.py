@@ -16,7 +16,7 @@ class Article(models.Model):
     slug = models.SlugField(unique=True)
     excerpt = models.TextField(default='', blank=True)
     content = models.TextField(default='', blank=True)
-    source = models.TextField(blank=True)
+    resource = models.TextField(null=True, blank=True)
     ping = models.BooleanField(default=True)
     type = models.IntegerField(
         choices=constants.post['TYPE_OPTIONS'], default=1)

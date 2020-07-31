@@ -22,7 +22,7 @@ class Spider:
             [model, id_target] = self.q.get()
             result = self.crawl_archive(
                 threading.currentThread().name, id_target)
-            model.source = json.dumps(result)
+            model.resource = json.dumps(result)
             model.save()
             self.q.task_done()
 
