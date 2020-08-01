@@ -3,11 +3,11 @@ from audio_src.apps.menus.api.serializers import MenuSerializers
 from audio_src.apps.menus.models import Menu
 
 
-class MenuListAPIView(generics.ListCreateAPIView):
+class MenuListView(generics.ListCreateAPIView):
     serializer_class = MenuSerializers
     queryset = Menu.objects.all()
 
 
-class MenuAPIView(generics.RetrieveUpdateDestroyAPIView):
+class MenuDetailsView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = MenuSerializers
     queryset = Menu.objects.all()

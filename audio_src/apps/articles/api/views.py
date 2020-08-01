@@ -30,9 +30,10 @@ class ArticleListView(generics.ListCreateAPIView):
 class ArticleDetailsView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ArticleSerializer
     queryset = Article.objects.all()
+    lookup_field = 'pk'
 
 
-class ArticleDetailBySlugView(generics.RetrieveAPIView):
+class ArticleDetailsWithSlugView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ArticleSerializer
     queryset = Article.objects.all()
     lookup_field = 'slug'
