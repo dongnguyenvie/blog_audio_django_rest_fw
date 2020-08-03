@@ -4,6 +4,7 @@ from drf_queryfields import QueryFieldsMixin
 
 from audio_src.apps.articles.models import Article
 from audio_src.apps.metas.api.serializers import MetaSerializers, MetaModel
+from audio_src.apps.blogs.api.serializers import BlogSerializer
 from audio_src.apps.utils.crawler.spider import Spider
 from audio_src.apps.utils.serializers.helper import getOwnerAndBlog
 
@@ -19,13 +20,15 @@ class ArticleSerializer(QueryFieldsMixin, serializers.ModelSerializer):
     owner = serializers.HiddenField(
         default=serializers.CurrentUserDefault()
     )
-    blog = serializers.StringRelatedField(read_only=True)
+    blog_title = serializers.StringRelatedField(
+        source='blog.title', read_only=True)
+    blog_slug = serializers.StringRelatedField(
+        source='blog.slug', read_only=True)
 
     class Meta:
         model = Article
         # fields = '__all__'
         exclude = ['isDeleted']
-
 
     def create(self, validated_data):
         [owner, blog] = getOwnerAndBlog(self, validated_data)

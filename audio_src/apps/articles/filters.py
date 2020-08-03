@@ -34,6 +34,8 @@ class ArticleFilter(django_filters.rest_framework.FilterSet):
     #     field_name='categories__id', lookup_expr='isnull', exclude=True)
     # tags__id = django_filters.AllValuesMultipleFilter(
     #     field_name='tags__id', lookup_expr='in')
+    has_category = django_filters.BooleanFilter(
+        field_name='categories', lookup_expr='isnull', exclude=True)
 
     class Meta:
         model = Article
@@ -44,7 +46,10 @@ class ArticleFilter(django_filters.rest_framework.FilterSet):
             'id': ['in', 'gt'],
             'meta__view': [],
             'tags__id': ['in'],
+            'blog__id': ['exact'],
+            'blog__slug': ['exact'],
             'categories__id': ['exact', 'in'],
+            'categories': ['isnull'],
             'isDeleted': ['exact']
             # 'release_date': ['exact', 'year__gt'],
         }
