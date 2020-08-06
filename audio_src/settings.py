@@ -63,9 +63,10 @@ INSTALLED_APPS = [
     'audio_src.apps.widgets',
     'audio_src.apps.menus',
     'audio_src.apps.settings',
+    'audio_src.apps.users',
+    'audio_src.apps.comments',
     # 'audio_src.apps.crawls',
     'audio_src.apps.test_api',
-    'audio_src.apps.users',
     # 'audio_src.apps.utils'
 ]
 

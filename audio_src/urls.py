@@ -31,6 +31,7 @@ URL_APPS = [
     path('menu/', include(('audio_src.apps.menus.api.urls', 'menu-api'), namespace="menu-api")),
     path('setting/', include(('audio_src.apps.settings.api.urls', 'setting-api'), namespace="setting-api")),
     path('tag/', include(('audio_src.apps.tags.api.urls', 'tag-api'), namespace="tag-api")),
+    path('comment/', include(('audio_src.apps.comments.api.urls', 'comment-api'), namespace="comment-api")),
 
     # path('aaaa/', include((urlJWT, 'asetting-api'), namespace="asetting-api"))
     # path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
