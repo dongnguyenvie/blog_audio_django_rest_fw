@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 # from audio_src.apps.plugins.jwt import urlpatterns as urlJWT
 # from rest_framework_simplejwt.views import (
 #     TokenObtainPairView,
@@ -32,6 +34,7 @@ URL_APPS = [
     path('setting/', include(('audio_src.apps.settings.api.urls', 'setting-api'), namespace="setting-api")),
     path('tag/', include(('audio_src.apps.tags.api.urls', 'tag-api'), namespace="tag-api")),
     path('comment/', include(('audio_src.apps.comments.api.urls', 'comment-api'), namespace="comment-api")),
+    path('media/', include(('audio_src.apps.medias.api.urls', 'media-api'), namespace="media-api")),
 
     # path('aaaa/', include((urlJWT, 'asetting-api'), namespace="asetting-api"))
     # path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
@@ -46,3 +49,4 @@ urlpatterns = [
     path('test/', include('audio_src.apps.test_api.api.urls'))
 
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

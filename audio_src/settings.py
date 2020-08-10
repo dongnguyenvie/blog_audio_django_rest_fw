@@ -16,6 +16,13 @@ import dotenv
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# Load ENV
+dotenv_file = os.path.join(BASE_DIR, ".env")
+if os.path.isfile(dotenv_file):
+    dotenv.load_dotenv(dotenv_file)
+MODE_ENV = os.getenv("MODE_ENV") or False
+
+
 # Modules
 # sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
@@ -34,12 +41,6 @@ CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
     'https://localhost:3000',
 )
-# Load env
-dotenv_file = os.path.join(BASE_DIR, ".env")
-if os.path.isfile(dotenv_file):
-    dotenv.load_dotenv(dotenv_file)
-MODE_ENV = os.getenv("MODE_ENV") or False
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -65,6 +66,7 @@ INSTALLED_APPS = [
     'audio_src.apps.settings',
     'audio_src.apps.users',
     'audio_src.apps.comments',
+    'audio_src.apps.medias',
     # 'audio_src.apps.crawls',
     'audio_src.apps.test_api',
     # 'audio_src.apps.utils'
@@ -153,6 +155,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+
+MEDIA_URL =  '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Config core extension
 from audio_src.core.rest_framework import *

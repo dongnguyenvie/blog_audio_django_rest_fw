@@ -20,6 +20,14 @@ menu = {
     ]
 }
 
+media_type = {
+    'TYPE_OPTIONS': [
+        (1, 'drive'),
+        (2, 's3'),
+        (2, 'local'),
+    ]
+}
+
 CACHE_TIME_TTL = os.getenv("CACHE_TIME_TTL") or 1 * 1
 
 TOP_WATCHING_STORY_KEY = "TOP_WATCHING_STORY_KEY"
