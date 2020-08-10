@@ -18,7 +18,6 @@ class SettingTableResultsSetPagination(PageNumberPagination):
 class CommentListView(generics.ListCreateAPIView):
     serializer_class = CommentSerializer
     queryset = Comment.objects.all()
-    pagination_class = None
     filter_backends = [DjangoFilterBackend]
     filterset_fields = '__all__'
 
