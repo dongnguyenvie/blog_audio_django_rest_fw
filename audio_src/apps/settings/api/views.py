@@ -11,13 +11,13 @@ from audio_src.apps.settings.models import Settings
 class SettingTableResultsSetPagination(PageNumberPagination):
     page_size = 100
     page_size_query_param = 'page_size'
-    max_page_size = 1000
+    max_page_size = 10000
 
 
 class SettingListView(generics.ListCreateAPIView):
     serializer_class = SettingSerializer
     queryset = Settings.objects.all()
-    pagination_class = None
+    pagination_class = SettingTableResultsSetPagination
 
     @method_decorator(cache_page(constants.CACHE_TIME_TTL), name="settings")
     def list(self, *args, **kwargs):

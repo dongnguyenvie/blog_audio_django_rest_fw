@@ -26,3 +26,9 @@ class CategoryListView(generics.ListCreateAPIView):
 class CategoryDetailsView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CategorySerializers
     queryset = Category.objects.all()
+
+
+class CategoryDetailsWithSlugView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = CategorySerializers
+    queryset = Category.objects.all()
+    lookup_field = 'slug'

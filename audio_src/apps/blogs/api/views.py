@@ -29,3 +29,11 @@ class BlogDetailsView(generics.RetrieveUpdateDestroyAPIView):
     # permission_classes = []
     # lookup_url_kwarg = 'id'
     # lookup_field = 'id'
+
+class BlogDetailsWithSlugView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = BlogSerializer
+    queryset = Blog.objects.all()
+    lookup_field = 'slug'
+    # permission_classes = []
+    # lookup_url_kwarg = 'id'
+    # lookup_field = 'id'

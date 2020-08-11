@@ -18,7 +18,7 @@ class ArticleListView(generics.ListCreateAPIView):
 
     filter_backends = [DjangoFilterBackend,
                        filters.SearchFilter, RelatedOrderingFilter]
-    # filter_class = ArticleFilter
+    filter_class = ArticleFilter
     filterset_fields = '__all__'
     ordering_fields = ('__all_related__')
 
@@ -30,9 +30,10 @@ class ArticleListView(generics.ListCreateAPIView):
 class ArticleDetailsView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ArticleSerializer
     queryset = Article.objects.all()
+    lookup_field = 'pk'
 
 
-class ArticleDetailBySlugView(generics.RetrieveAPIView):
+class ArticleDetailsWithSlugView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ArticleSerializer
     queryset = Article.objects.all()
     lookup_field = 'slug'
