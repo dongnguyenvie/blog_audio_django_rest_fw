@@ -22,7 +22,7 @@ class ArticleListView(generics.ListCreateAPIView):
     filterset_fields = '__all__'
     ordering_fields = ('__all_related__')
 
-    # @method_decorator(cache_page(constants.CACHE_TIME_TTL), name="articles")
+    @method_decorator(cache_page(constants.CACHE_TIME_TTL), name="articles")
     def list(self, *args, **kwargs):
         return super(ArticleListView, self).list(self, *args, **kwargs)
 

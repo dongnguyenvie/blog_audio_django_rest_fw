@@ -124,3 +124,6 @@ dmypy.json
 
 scrapping/data/
 .env
+
+mycreds.txt
+client_secrets.json

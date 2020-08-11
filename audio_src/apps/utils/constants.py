@@ -28,7 +28,7 @@ media_type = {
     ]
 }
 
-CACHE_TIME_TTL = os.getenv("CACHE_TIME_TTL") or 1 * 1
+CACHE_TIME_TTL = int(os.getenv("CACHE_TIME_TTL")) if os.getenv("CACHE_TIME_TTL") else 60 * 1
 
 TOP_WATCHING_STORY_KEY = "TOP_WATCHING_STORY_KEY"
 
