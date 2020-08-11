@@ -8,11 +8,13 @@ services:
   #     - POSTGRES_USER=postgres
   #     - POSTGRES_PASSWORD=postgres
   web:
-    build: .
+    build:
+      context: .
+      dockerfile: ./compose/Dockerfile.prod
     container_name: audiovyvy_c
     command: python manage.py runserver 0.0.0.0:8000
-    volumes:
-      - .:/code
+    # volumes:
+    #   - .:/code
     environment:
       - MODE_ENV=production
     ports:

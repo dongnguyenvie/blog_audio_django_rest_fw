@@ -1,24 +1,27 @@
+
+Django==3.0.5
+psycopg2-binary
+
 #heroku
 django-heroku
 gunicorn
 
-Django==3.0.5
 python-dotenv
 djangorestframework==3.11.0
 djangorestframework-simplejwt==4.4.0
 #swarm
 drf-yasg==1.17.1
 #beautify html
-bs4
+bs4==0.0.1
 
 scrapy==2.2.0
 scrapy-splash==0.7.2
-subprocess
-django-filter
-djangorestframework-queryfields
+#subprocess
+django-filter==2.3.0
+djangorestframework-queryfields==1.0.0
 
 # channels
-channels
-channels_redis
-django-redis
-django-cors-headers
+channels==2.4.0
+channels-redis==3.0.1
+django-redis==4.12.1
+django-cors-headers==3.4.0

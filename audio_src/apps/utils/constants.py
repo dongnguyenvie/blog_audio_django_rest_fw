@@ -20,7 +20,7 @@ menu = {
     ]
 }
 
-CACHE_TIME_TTL = os.getenv("CACHE_TIME_TTL") or 60 * 1
+CACHE_TIME_TTL = int(os.getenv("CACHE_TIME_TTL", 60 * 1))
 
 TOP_WATCHING_STORY_KEY = "TOP_WATCHING_STORY_KEY"
 

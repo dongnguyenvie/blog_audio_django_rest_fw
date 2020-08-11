@@ -1,11 +1,12 @@
-print('MODE IS production')
+import os
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'audiovyvy_prod',
-        'USER': 'root',
-        'PASSWORD': 'Abc@123',
-        'HOST': 'pi-ubuntu1',
-        'PORT': '5432',
+        'NAME':  os.getenv("POSTGRES_DB_NAME", "audiovyvy_prod"),
+        'USER': os.getenv("POSTGRES_USER", "root"),
+        'PASSWORD': os.getenv("POSTGRES_PASS", ""),
+        'HOST': os.getenv("POSTGRES_HOST", ""),
+        'PORT': os.getenv("POSTGRES_PORT", ""),
     }
 }
