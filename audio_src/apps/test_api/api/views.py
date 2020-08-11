@@ -43,7 +43,10 @@ def home(request):
     response['lorem'] = loremText.text
     return JsonResponse(response, safe=False)
 
-token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTk1NTA4OTEwLCJqdGkiOiJiNDZkOWIyODYyMDI0ZGYwYjk0ZmYxMzhhYmMxMjE4OCIsInVzZXJfaWQiOiJkNWQ1NTc3My02NmRlLTQ4ZWItOWFiYS02NjIyM2ZhNzdmZGUifQ.k1MFTbyDSjoqeHTdj680zO13Of2fxiOUtJZftZq2SQQ'
+
+token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTk2MjIzODEyLCJqdGkiOiIzYThlNzJlN2ZhNjk0M2UzYjExZGRiYjlmZGI5NjBhZCIsInVzZXJfaWQiOiJkNWQ1NTc3My02NmRlLTQ4ZWItOWFiYS02NjIyM2ZhNzdmZGUifQ.0T5Lfyq820qjXL9zKTLQI5OYLpN-6Od557Lt58Te_iU'
+
+
 class TestView(viewsets.ViewSet):
     permission_classes = []
     authentication_classes = []
@@ -62,34 +65,39 @@ class TestView(viewsets.ViewSet):
             for row in csv_reader:
                 if line_count == 0:
                     print(f'Column names are {", ".join(row)}')
-                elif line_count > 35 and line_count < 50:
+                elif line_count > 600 and line_count < 650:
                     url = 'http://localhost:8000/api/v1/article/'
                     headers = {
                         'authorization': 'Bearer {token}'.format(token=token),
                         'Content-Type': 'application/json'
                     }
+                    # resource = map(lambda x: {'url': x},
+                    #                list(row[2].split(",")))
+                    resource = map(
+                        lambda x: {'url': x, 'title': None}, list(row[2].split(",")))
+                    # print(json.dumps(list(resource)))
                     data = {
-                        'source': json.dumps(row[2].split(",")),
+                        'resource': json.dumps(list(resource)),
                         'content': contentSeed,
                         'excerpt': excerptText,
                         'thumbnail': row[3],
                         "title": row[0],
                         "slug": "slug-of-{uuid}".format(uuid=uuid.uuid4()),
                         "ping": False,
-                        "type": 1,
+                        "type": 3,
                         'meta': {
                                 'jsonLd': "",
                                 'view': math.ceil(random.random() * 100),
                                 'like': math.ceil(random.random() * 100),
                         },
-                        'categories': ['07f6b576-5a29-43e2-a16f-51221d4d47e2'],
+                        'categories': ['339cb2d6-9ed6-4a84-b042-276987a2be11'],
                         'tags': ['76998085-7fe7-49ab-a0d1-8d450b84d09e']
                     }
                     try:
-                        response = requests.post(url, json=data, headers=headers)
+                        response = requests.post(
+                            url, json=data, headers=headers)
                         response.raise_for_status()
                     except requests.exceptions.HTTPError as e:
-                        print(1111)
                         print(e.response.text)
 
                     # post = Post(title=row[0], slug=row[1], source=json.dumps(row[2].split(

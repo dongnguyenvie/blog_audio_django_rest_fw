@@ -26,3 +26,9 @@ class TagListView(generics.ListCreateAPIView):
 class TagDetailsView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = TagSerializers
     queryset = Tag.objects.all()
+
+
+class TagDetailsWithSlugView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = TagSerializers
+    queryset = Tag.objects.all()
+    lookup_field = 'slug'
