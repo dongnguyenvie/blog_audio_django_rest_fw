@@ -16,7 +16,7 @@ Spider(q)
 class ArticleSerializer(QueryFieldsMixin, serializers.ModelSerializer):
     meta = MetaSerializers(required=False)
     id_audio = serializers.CharField(
-        required=False, default='')
+        required=False, default='', write_only=True)
     owner = serializers.HiddenField(
         default=serializers.CurrentUserDefault()
     )
@@ -24,6 +24,8 @@ class ArticleSerializer(QueryFieldsMixin, serializers.ModelSerializer):
         source='blog.title', read_only=True)
     blog_slug = serializers.StringRelatedField(
         source='blog.slug', read_only=True)
+    user = serializers.StringRelatedField(read_only=True)
+    blog = serializers.StringRelatedField(read_only=True)
 
     class Meta:
         model = Article

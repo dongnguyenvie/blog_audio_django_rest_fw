@@ -17,7 +17,7 @@ class Blog(models.Model):
     # RelationShip
     meta = models.OneToOneField(Meta, on_delete=models.SET_NULL, null=True)
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
-                             on_delete=models.SET_NULL, null=True)
+                                on_delete=models.SET_NULL, null=True, unique=True)
     # Generator
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)

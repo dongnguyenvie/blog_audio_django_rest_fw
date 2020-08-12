@@ -1,6 +1,6 @@
 from rest_framework.serializers import ValidationError
 from rest_framework import status, permissions
-from audio_src.apps.utils.validator.extends import BlogValidationError, OwnerNotExistsValidationError
+from audio_src.apps.utils.validator.extends import BlogNotExistsError, OwnerNotExistsValidationError
 from audio_src.apps.blogs.models import Blog
 
 def getOwnerAndBlog(self, validated_data):
@@ -9,7 +9,7 @@ def getOwnerAndBlog(self, validated_data):
     try:
         blog = Blog.objects.get(user=owner.id)
     except expression as identifier:
-        raise BlogValidationError() 
+        raise BlogNotExistsError() 
 
     return [owner, blog]
 

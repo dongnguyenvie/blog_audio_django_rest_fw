@@ -44,7 +44,7 @@ def home(request):
     return JsonResponse(response, safe=False)
 
 
-token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTk2MjIzODEyLCJqdGkiOiIzYThlNzJlN2ZhNjk0M2UzYjExZGRiYjlmZGI5NjBhZCIsInVzZXJfaWQiOiJkNWQ1NTc3My02NmRlLTQ4ZWItOWFiYS02NjIyM2ZhNzdmZGUifQ.0T5Lfyq820qjXL9zKTLQI5OYLpN-6Od557Lt58Te_iU'
+token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTk3MjUyOTMxLCJqdGkiOiJiM2ZkNjIwNmNmZTk0ZDczOTllNDkxZmIyNjM3Y2JjZiIsInVzZXJfaWQiOiIwMTU5ZDlhZi1lMDEyLTRmYzQtOWRhNC00ZmUzYzNkODczM2IifQ.VmOjPapMIDXusx2tr0iJUkfnh0MEa657foQSwMdZurw'
 
 
 class TestView(viewsets.ViewSet):
@@ -90,8 +90,8 @@ class TestView(viewsets.ViewSet):
                                 'view': math.ceil(random.random() * 100),
                                 'like': math.ceil(random.random() * 100),
                         },
-                        'categories': ['339cb2d6-9ed6-4a84-b042-276987a2be11'],
-                        'tags': ['76998085-7fe7-49ab-a0d1-8d450b84d09e']
+                        'categories': ['8ec542ae-f651-49bd-bd08-c850f4c3e7c9'],
+                        'tags': ['52d9bd03-bbae-475c-afe5-183e17419648']
                     }
                     try:
                         response = requests.post(
