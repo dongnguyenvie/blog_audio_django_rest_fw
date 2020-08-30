@@ -11,6 +11,7 @@ services:
     build:
       context: .
       dockerfile: ./compose/Dockerfile.prod
+    restart: always
     container_name: audio_server
     command: python manage.py runserver 0.0.0.0:8000
     # volumes:
