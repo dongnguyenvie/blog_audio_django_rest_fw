@@ -14,7 +14,7 @@ drf-yasg==1.17.1
 #beautify html
 bs4==0.0.1
 
-scrapy==2.2.0
+scrapy==2.6.1
 scrapy-splash==0.7.2
 #subprocess
 django-filter==2.3.0
